@@ -5,7 +5,7 @@
 }
 
 body {
-	background-image: linear-gradient(120deg, #f69635, #fda085);
+	background-image: linear-gradient(120deg, #f69635, #fda085, #49b733);
 	color: white;
 	font-family: sans-serif;
 	min-height: 100vh;
@@ -52,4 +52,28 @@ header,
 	display: flex;
 	align-items: center;
 	align-self: center;
+}
+
+.success {
+	display: flex;
+	gap: 15px;
+	background-color: #efe;
+	border: 1px solid #ded;
+	color: #9a9;
+}
+
+.alert {
+	position: relative;
+	top: 10;
+	left: 0;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	margin: 10px;
+	line-height: 1.8;
+	border-radius: 5px;
+	cursor: hand;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-weight: 400;
 }

@@ -12,7 +12,12 @@ const TodoContainer = () => {
 					return (
 						<div className="todo" key={i}>
 							<div>{e.title}</div>
-							<button onClick={() => dispatch(deleteTitle(e.id))}>-</button>
+							<button
+								className="button"
+								onClick={() => dispatch(deleteTitle(e.id))}
+							>
+								-
+							</button>
 						</div>
 					);
 				})}

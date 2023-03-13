@@ -1,0 +1,31 @@
+.alert {
+	position: absolute;
+	top: 90%;
+	left: 0;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	margin: 10px;
+	line-height: 1.8;
+	border-radius: 5px;
+	cursor: hand;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-weight: 400;
+}
+
+.success {
+	background-color: rgb(255, 245, 238);
+	border: 1px solid #ded;
+	color: rgb(206, 120, 113);
+}
+.hidden {
+	visibility: hidden;
+	transition: ease 1s;
+	opacity: 0;
+}
+
+.show {
+	visibility: show;
+	opacity: 1;
+}
