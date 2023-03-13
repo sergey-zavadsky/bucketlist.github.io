@@ -5,12 +5,14 @@ const tr = (key) => {
 				placeholder: 'Добавить в список',
 				bucketList: 'Список желаний',
 				emptyError: 'Заполните поле',
+				changeLanguage: 'Сменить язык',
 			};
 		case 'BY':
 			return {
 				placeholder: 'Дадаць у спіс',
 				bucketList: 'Спіс жаданняў',
 				emptyError: 'Запоўніце поле',
+				changeLanguage: 'Змяніть мову',
 			};
 		default:
 			break;
