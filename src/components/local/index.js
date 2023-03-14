@@ -6,6 +6,9 @@ const tr = (key) => {
 				bucketList: 'Список желаний',
 				emptyError: 'Заполните поле',
 				changeLanguage: 'Сменить язык',
+				firstCompleteToGo: 'желаний добавлено, добавь еще ',
+				secondCompleteToGo: 'желаний добавлено! Поздравляю!',
+				thirdCompleteToGo: 'желаний добавлено.',
 			};
 		case 'BY':
 			return {
@@ -13,6 +16,9 @@ const tr = (key) => {
 				bucketList: 'Спіс жаданняў',
 				emptyError: 'Запоўніце поле',
 				changeLanguage: 'Змяніть мову',
+				firstCompleteToGo: 'жаданняў дадазена, дадай яшчэ ',
+				secondCompleteToGo: 'жаданняу дадана! Віншую!',
+				thirdCompleteToGo: 'жаданняу дадана.',
 			};
 		default:
 			break;

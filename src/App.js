@@ -1,4 +1,5 @@
 import './App.css';
+import { CompleteToGo } from './components/completeToGo/completeToGo';
 import { InputForm } from './components/inputForm/inputForm';
 import LanguageSwitcher from './components/languageSwitcher/languageSwitcher';
 import { TodoContainer } from './components/todoContainer/todoContainer';
@@ -10,6 +11,7 @@ function App() {
 			<div className="main">
 				{/* <ToggleSwitch /> */}
 				<LanguageSwitcher />
+				<CompleteToGo />
 				<InputForm />
 				<TodoContainer />
 			</div>

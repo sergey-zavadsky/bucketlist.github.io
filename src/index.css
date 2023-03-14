@@ -29,6 +29,7 @@ header,
 	font-size: 2rem;
 	border: none;
 	background: white;
+	max-width: 300px;
 }
 
 .App button {
