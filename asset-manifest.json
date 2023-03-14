@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bucketlist.github.io/static/css/main.a3594f65.css",
+    "main.js": "/bucketlist.github.io/static/js/main.b4290f9a.js",
+    "index.html": "/bucketlist.github.io/index.html",
+    "main.a3594f65.css.map": "/bucketlist.github.io/static/css/main.a3594f65.css.map",
+    "main.b4290f9a.js.map": "/bucketlist.github.io/static/js/main.b4290f9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3594f65.css",
+    "static/js/main.b4290f9a.js"
+  ]
+}
