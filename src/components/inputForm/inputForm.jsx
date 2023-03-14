@@ -50,13 +50,6 @@ const InputForm = () => {
 		<div>
 			<h1>{intl(isLanguage).bucketList}</h1>
 
-			<button
-				type="button"
-				className="todo-button"
-				onClick={() => switchLanguage()}
-			>
-				{/* {isLanguage === 'RU' ? 'Сменить язык на "BY' : 'Змяніць мову на "RU"'} */}
-			</button>
 			<div className="App">
 				<div className={`success alert ${isShown}`}>
 					<p>{intl(isLanguage).emptyError}</p>
