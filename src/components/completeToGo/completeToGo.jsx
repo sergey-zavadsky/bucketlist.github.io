@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { tr as intl } from '../local';
-import { switchLanguage } from '../reducers/languageSwitcher/languageSwitcherReducer';
 
 const CompleteToGo = () => {
 	const [isComplete, setComplete] = useState(0);
-	const [isMax, setMax] = useState(10);
+	// const [isMax, setMax] = useState(10);
 	const data = useSelector((state) => state.inputState.value);
+
+	const isMax = useSelector((state) => {
+		return state.completeToGoState?.isMaxValue;
+	});
 
 	const isLanguage = useSelector((state) => {
 		return state.switchLanguage.currentLanguage;
