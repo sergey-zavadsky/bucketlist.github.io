@@ -7,16 +7,15 @@ const completeToGoReducer = (state = initialState, action) => {
 		case 'SET_MAX':
 			return {
 				...state,
-				maxValue: action.payload,
+				isMaxValue: action.payload,
 			};
 		default:
 			return state;
 	}
 };
 
-const completeToGoAction = (maxValue) => ({
-	type: 'SET_MAX',
-	payload: maxValue,
-});
+const completeToGoAction = (payload) => {
+	return { type: 'SET_MAX', payload };
+};
 
 export { completeToGoReducer, completeToGoAction };

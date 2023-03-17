@@ -4,9 +4,7 @@ import { tr as intl } from '../local';
 
 const CompleteToGo = () => {
 	const [isComplete, setComplete] = useState(0);
-	// const [isMax, setMax] = useState(10);
 	const data = useSelector((state) => state.inputState.value);
-
 	const isMax = useSelector((state) => {
 		return state.completeToGoState?.isMaxValue;
 	});
@@ -34,7 +32,7 @@ const CompleteToGo = () => {
 			</div>
 		);
 	}
-	if (data?.length > isMax) {
+	if (data?.length >= isMax) {
 		return (
 			<div>
 				<span>{isComplete}</span> {intl(isLanguage).thirdCompleteToGo}
