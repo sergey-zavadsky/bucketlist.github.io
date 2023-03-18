@@ -16,9 +16,9 @@ const tr = (key) => {
 				bucketList: 'Спіс жаданняў',
 				emptyError: 'Запоўніце поле',
 				changeLanguage: 'Змяніть мову',
-				firstCompleteToGo: 'жаданняў дадазена, дадай яшчэ ',
-				secondCompleteToGo: 'жаданняу дадана! Віншую!',
-				thirdCompleteToGo: 'жаданняу дадана.',
+				firstCompleteToGo: 'жадання дадазена, дадай яшчэ ',
+				secondCompleteToGo: 'жадання дадана! Віншую!',
+				thirdCompleteToGo: 'жадання дадана.',
 			};
 		default:
 			break;

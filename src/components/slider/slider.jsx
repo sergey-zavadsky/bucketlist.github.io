@@ -21,7 +21,7 @@ const Slider = () => {
 				max={200}
 				value={isMax}
 				step={1}
-				className="slider"
+				className=""
 				id="myRange"
 				onChange={(e) => sliderHandler(e)}
 			/>

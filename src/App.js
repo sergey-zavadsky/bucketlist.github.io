@@ -3,18 +3,19 @@ import { CompleteToGo } from './components/completeToGo/completeToGo';
 import { InputForm } from './components/inputForm/inputForm';
 import LanguageSwitcher from './components/languageSwitcher/languageSwitcher';
 import { TodoContainer } from './components/todoContainer/todoContainer';
-// import ToggleSwitch from './components/bttn/ToggleSwitch';
+import ToggleSwitch from './components/bttn/ToggleSwitch';
+import ThemeContext from './provider/themeContext';
+import { useContext } from 'react';
 
 function App() {
+	const { theme, toggleTheme } = useContext(ThemeContext);
 	return (
-		<div>
-			<div className="main">
-				{/* <ToggleSwitch /> */}
-				<LanguageSwitcher />
-				<CompleteToGo />
-				<InputForm />
-				<TodoContainer />
-			</div>
+		<div className={`app-container ${theme}`}>
+			<ToggleSwitch />
+			<LanguageSwitcher />
+			<CompleteToGo />
+			<InputForm />
+			<TodoContainer />
 		</div>
 	);
 }
