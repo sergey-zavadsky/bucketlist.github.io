@@ -24,16 +24,15 @@
 	background-color: #ccc;
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
+	border-radius: 34px;
 }
 
-.slider:before {
+/* The thumb (circle) */
+.thumb {
 	position: absolute;
-	content: '';
-	height: 26px;
-	width: 26px;
-	left: 4px;
-	bottom: 4px;
-	background-color: white;
+	width: 51px;
+	left: 11px;
+	bottom: 7px;
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
 }
@@ -46,66 +45,8 @@ input:focus + .slider {
 	box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked + .slider .thumb {
 	-webkit-transform: translateX(26px);
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
 }
-
-/* Rounded sliders */
-.slider.round {
-	border-radius: 34px;
-}
-
-.slider.round:before {
-	border-radius: 50%;
-}
-
-/* .toggle-switch-container {
-	display: flex;
-	align-items: center;
-	gap: 16px;
-}
-
-.toggle-switch {
-	display: inline-block;
-	width: 64px;
-	height: 34px;
-	border-radius: 17px;
-	background-color: #dfdfdf;
-
-	cursor: pointer;
-}
-
-.toggle-switch:hover {
-	background-color: #bcbcbc;
-}
-
-.toggle-switch-inner {
-	position: absolute;
-	top: 4px;
-	left: 4px;
-	width: 26px;
-	height: 26px;
-	border-radius: 50%;
-	background-color: #fff;
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-	transition: transform 0.2s ease;
-}
-
-.toggle-switch {
-	background-color: #61c24e;
-}
-
-.toggle-switch:hover {
-	background-color: #4b9d3d;
-}
-
-.toggle-switch .toggle-switch-inner {
-	transform: translateX(30px);
-}
-
-.toggle-switch-label {
-	font-size: 16px;
-	color: #777;
-} */

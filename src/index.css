@@ -10,7 +10,7 @@
 }
 
 .dark-theme {
-	--background: #000c1d;
+	--background: rgba(52, 53, 65, 1);
 	--text: #f8f8f2;
 }
 

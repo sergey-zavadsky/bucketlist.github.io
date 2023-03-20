@@ -1,33 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import './ToggleSwitch.css';
 import ThemeContext from '../../provider/themeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 function ToggleSwitch() {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 
-	const [isOn, setIsOn] = useState(false);
-
 	const handleClick = () => {
-		setIsOn((prevIsOn) => !prevIsOn);
 		toggleTheme();
 	};
 
+	const moon = <FontAwesomeIcon icon={faMoon} />;
+	const sun = <FontAwesomeIcon icon={faSun} />;
+
 	return (
 		<>
-			<label class="switch">
+			<label className={`switch ${theme}`}>
 				<input type="checkbox" />
-				<span class="slider round"></span>
+				<span className="slider round" onClick={handleClick}>
+					<span className="thumb">{theme === 'dark' ? moon : sun}</span>
+				</span>
 			</label>
-
-			{/* <div className="toggle-switch-container">
-				<button
-					className={`toggle-switch ${isOn ? theme : theme}`}
-					onClick={handleClick}
-				>
-					<span className="toggle-switch-inner" />
-				</button>
-				<span className="toggle-switch-label">{isOn ? 'On' : 'Off'}</span>
-			</div> */}
 		</>
 	);
 }

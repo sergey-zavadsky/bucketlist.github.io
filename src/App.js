@@ -8,7 +8,7 @@ import ThemeContext from './provider/themeContext';
 import { useContext } from 'react';
 
 function App() {
-	const { theme, toggleTheme } = useContext(ThemeContext);
+	const { theme } = useContext(ThemeContext);
 	return (
 		<div className={`app-container ${theme}`}>
 			<ToggleSwitch />
