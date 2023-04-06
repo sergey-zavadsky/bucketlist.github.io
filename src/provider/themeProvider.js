@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ThemeContext from './themeContext';
 
 const ThemeProvider = ({ children }) => {
-	const [theme, setTheme] = useState('light');
+	const [theme, setTheme] = useState('dark');
 
 	useEffect(() => {
 		// Get the root div

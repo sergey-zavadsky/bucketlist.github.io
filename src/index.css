@@ -96,3 +96,39 @@ header,
 	/* height: 100%;
 	width: 100%; */
 }
+
+.absolute-bottom {
+	position: absolute;
+	display: flex;
+	bottom: 3vh;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+	height: 45px;
+}
+
+.todo-input {
+	width: 80%;
+	height: 100%;
+	border-radius: 5px 0 0 5px;
+	background-color: rgb(59, 59, 64);
+	border-style: none;
+	padding-left: 2vh;
+	color: var(--text);
+	font-size: large;
+}
+.todo-button {
+	width: 20%;
+	height: 100%;
+	border-radius: 0 5px 5px 0;
+	background-color: rgb(68 70 91 / 63%);
+	border-style: none;
+	color: var(--text);
+	font-size: large;
+}
+
+.todo-input:focus {
+	outline: none;
+	color: var(--text);
+	line-height: large;
+}

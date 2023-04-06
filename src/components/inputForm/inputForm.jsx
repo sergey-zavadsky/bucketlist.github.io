@@ -4,11 +4,14 @@ import { switchLanguage } from '../reducers/languageSwitcher/languageSwitcherRed
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { tr as intl } from '../local';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const InputForm = () => {
 	const [inputedValue, setInputedValue] = useState('');
 	const [isShown, setIsShown] = useState('hidden');
-	// const [isLanguage, setIsLanguage] = useState('RU');
+	const plane = <FontAwesomeIcon icon={faPaperPlane} />;
+
 	const dispatch = useDispatch();
 
 	const isLanguage = useSelector((state) => {
@@ -36,16 +39,6 @@ const InputForm = () => {
 			inputedValue && inputHandler();
 		}
 	};
-
-	// const switchLanguage = () => {
-	// 	if (isLanguage === 'RU') {
-	// 		setIsLanguage('BY');
-	// 	}
-	// 	if (isLanguage === 'BY') {
-	// 		setIsLanguage('RU');
-	// 	}
-	// };
-
 	return (
 		<div>
 			<h1>{intl(isLanguage).bucketList}</h1>
@@ -55,25 +48,41 @@ const InputForm = () => {
 					<p>{intl(isLanguage).emptyError}</p>
 					<div onClick={() => setIsShown('hidden')}>X</div>
 				</div>
-				<input
-					value={inputedValue}
-					placeholder={intl(isLanguage).placeholder}
-					type="text"
-					onKeyUp={(e) => {
-						inputedValue ? handleKeyPressAdd(e) : setIsShown('show');
-					}}
-					className="todo-input"
-					onChange={(e) => setInputedValue(e.target.value)}
-				></input>
-				<button
-					type="button"
-					className="todo-button"
-					onClick={() => {
-						inputedValue ? inputedValue && inputHandler() : setIsShown('show');
-					}}
-				>
-					+
-				</button>
+				<div className="absolute-bottom">
+					<input
+						value={inputedValue}
+						placeholder={intl(isLanguage).placeholder}
+						type="text"
+						onKeyUp={(e) => {
+							inputedValue ? handleKeyPressAdd(e) : setIsShown('show');
+						}}
+						className="todo-input"
+						onChange={(e) => setInputedValue(e.target.value)}
+					></input>
+					{/* <div
+							type="button"
+							className="todo-button"
+							onClick={() => {
+								inputedValue
+									? inputedValue && inputHandler()
+									: setIsShown('show');
+							}}
+						>
+							{plane}
+						</div> */}
+
+					<button
+						type="button"
+						className="todo-button"
+						onClick={() => {
+							inputedValue
+								? inputedValue && inputHandler()
+								: setIsShown('show');
+						}}
+					>
+						{plane}
+					</button>
+				</div>
 			</div>
 		</div>
 	);

@@ -30,3 +30,8 @@
 	transition: ease 1s;
 	opacity: 0;
 }
+.success,
+.hidden {
+	position: absolute;
+	bottom: 5vh;
+}
