@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/bucketlist.github.io/static/css/main.7bd4c751.css",
-    "main.js": "/bucketlist.github.io/static/js/main.cf8ca6fb.js",
+    "main.css": "/bucketlist.github.io/static/css/main.7b93ebf8.css",
+    "main.js": "/bucketlist.github.io/static/js/main.d63b38bd.js",
     "index.html": "/bucketlist.github.io/index.html",
-    "main.7bd4c751.css.map": "/bucketlist.github.io/static/css/main.7bd4c751.css.map",
-    "main.cf8ca6fb.js.map": "/bucketlist.github.io/static/js/main.cf8ca6fb.js.map"
+    "main.7b93ebf8.css.map": "/bucketlist.github.io/static/css/main.7b93ebf8.css.map",
+    "main.d63b38bd.js.map": "/bucketlist.github.io/static/js/main.d63b38bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.7bd4c751.css",
-    "static/js/main.cf8ca6fb.js"
+    "static/css/main.7b93ebf8.css",
+    "static/js/main.d63b38bd.js"
   ]
 }
