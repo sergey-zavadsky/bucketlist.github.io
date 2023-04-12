@@ -4,13 +4,13 @@ import { switchLanguage } from '../reducers/languageSwitcher/languageSwitcherRed
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { tr as intl } from '../local';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 
 const InputForm = () => {
 	const [inputedValue, setInputedValue] = useState('');
 	const [isShown, setIsShown] = useState('hidden');
-	const plane = <FontAwesomeIcon icon={faPaperPlane} />;
+	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
 
 	const dispatch = useDispatch();
 
@@ -41,8 +41,6 @@ const InputForm = () => {
 	};
 	return (
 		<div>
-			<h1>{intl(isLanguage).bucketList}</h1>
-
 			<div className="App">
 				<div className={`success alert ${isShown}`}>
 					<p>{intl(isLanguage).emptyError}</p>

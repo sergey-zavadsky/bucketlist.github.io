@@ -11,12 +11,18 @@ const TodoContainer = () => {
 				{data.map((e, i) => {
 					return (
 						<div className="todo" key={i}>
-							<div>{e.title}</div>
+							<div className="todo-title">{e.title}</div>
 							<button
-								className="button"
+								className="marked"
 								onClick={() => dispatch(deleteTitle(e.id))}
 							>
 								-
+							</button>
+							<button
+								className="todo-button-list"
+								onClick={() => dispatch(deleteTitle(e.id))}
+							>
+								✓
 							</button>
 						</div>
 					);
