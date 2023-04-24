@@ -1,16 +1,11 @@
 const initialState = {
 	value: [
 		{
-			id: 1,
-			title: 'Serega',
-		},
-		{
-			id: 2,
-			title: 'Garik',
-		},
-		{
-			id: 3,
-			title: 'Петро',
+			12: {
+				_id: '64459996a368e94b464bddd6',
+				createdDate: '2023-04-23T20:48:22.832Z',
+				text: 'new doka3',
+			},
 		},
 	],
 };

@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { tr as intl } from '../local';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
+import { getTodos } from '../../api/getTodos';
 
 const InputForm = () => {
 	const [inputedValue, setInputedValue] = useState('');
@@ -24,7 +25,7 @@ const InputForm = () => {
 		}, 10000);
 	}, [isShown]);
 
-	const inputHandler = () => {
+	const inputHandler = async () => {
 		dispatch(
 			addTitle({
 				title: inputedValue,

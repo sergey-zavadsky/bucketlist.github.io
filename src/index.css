@@ -80,6 +80,7 @@ header,
 	width: 70%;
 	margin-left: 15%;
 	margin-right: 15%;
+	margin-bottom: 15%;
 }
 
 .todo-title {
@@ -157,7 +158,7 @@ header,
 .todo-button {
 	width: 20%;
 	border-radius: 0 5px 5px 0;
-	background-color: rgb(68 70 91 / 63%);
+	background-color: rgb(68 70 91 / 98%);
 	border-style: none;
 	color: var(--text);
 	font-size: large;
