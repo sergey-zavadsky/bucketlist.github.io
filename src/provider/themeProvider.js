@@ -5,10 +5,8 @@ const ThemeProvider = ({ children }) => {
 	const [theme, setTheme] = useState('dark');
 
 	useEffect(() => {
-		// Get the root div
 		const rootDiv = document.getElementById('root');
 
-		// Update root div class based on the current theme
 		if (rootDiv) {
 			if (theme === 'light') {
 				rootDiv.classList.add('light-theme');

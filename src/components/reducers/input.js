@@ -40,5 +40,11 @@ const deleteTitle = (id) => {
 		id,
 	};
 };
+const isUpdatedList = (bool) => {
+	return {
+		type: 'ISUPDATED',
+		bool,
+	};
+};
 
-export { inputReducer, addTitle, deleteTitle };
+export { inputReducer, addTitle, deleteTitle, isUpdatedList };

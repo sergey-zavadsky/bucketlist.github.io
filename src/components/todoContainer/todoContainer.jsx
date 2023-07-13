@@ -1,40 +1,27 @@
-import { useSelector } from 'react-redux';
-import { addTitle } from './../reducers/input';
-import { deleteTitle } from '../reducers/input';
-import { useDispatch } from 'react-redux';
 import { getTodos } from '../../api/getTodos';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { deleteTodo } from '../../api/deleteTodo';
+import { isUploadedState, isCountState } from '../../app/stores';
+import { useRecoilState } from 'recoil';
 
 const TodoContainer = () => {
 	const [todos, setTodos] = useState([]);
-	const data = useSelector((state) => state.inputState.value);
-
-	const dispatch = useDispatch();
-
-	const response = async () => {
-		const res = await getTodos();
-		return res;
+	const [isCount, setCount] = useRecoilState(isCountState);
+	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
+	const fetchData = async () => {
+		try {
+			const res = await getTodos();
+			setTodos(res);
+			const objectLength = (obj) => Object.entries(obj).length;
+			setCount(objectLength(res));
+		} catch (error) {
+			console.log(error);
+		}
 	};
-	const apiCallCheck = useRef(false);
 
 	useEffect(() => {
-		if (apiCallCheck.current === false) {
-			const fetchData = async () => {
-				try {
-					const res = await response();
-					setTodos(res);
-
-					console.log(res);
-				} catch (error) {
-					console.log(error);
-				}
-			};
-			fetchData();
-			return () => {
-				apiCallCheck.current = true;
-			};
-		}
-	}, [todos]);
+		fetchData();
+	}, [isUploaded]);
 
 	return (
 		<div className="todo-container">
@@ -45,13 +32,16 @@ const TodoContainer = () => {
 							<div className="todo-title">{value.text}</div>
 							<button
 								className="marked"
-								onClick={() => dispatch(deleteTitle(value._id))}
+								onClick={() => {
+									deleteTodo(value._id);
+									setisUploaded(!isUploaded);
+								}}
 							>
 								-
 							</button>
 							<button
 								className="todo-button-list"
-								onClick={() => dispatch(deleteTitle(value._id))}
+								onClick={() => console.log('mark todo')}
 							>
 								✓
 							</button>
