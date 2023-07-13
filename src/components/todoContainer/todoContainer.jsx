@@ -33,6 +33,9 @@ const TodoContainer = () => {
 			array.map((item, index) => [index.toString(), item]),
 		);
 
+		const objectLength = (obj) => Object.entries(obj).length;
+		setCount(objectLength(isList) - 1);
+
 		setisList(newObject);
 	};
 

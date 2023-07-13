@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 const CompleteToGo = () => {
 	const [isCount, setCount] = useRecoilState(isCountState);
 
-	const data = useSelector((state) => state.inputState.value);
+	// const data = useSelector((state) => state.inputState.value);
 	const isMax = useSelector((state) => {
 		return state.completeToGoState?.isMaxValue;
 	});
@@ -16,7 +16,7 @@ const CompleteToGo = () => {
 		return state.switchLanguage.currentLanguage;
 	});
 
-	if (data?.length < isMax) {
+	if (isCount < isMax) {
 		return (
 			<div>
 				<span>{isCount}</span> {intl(isLanguage).firstCompleteToGo}{' '}
@@ -24,14 +24,14 @@ const CompleteToGo = () => {
 			</div>
 		);
 	}
-	if (data?.length === isMax) {
+	if (isCount === isMax) {
 		return (
 			<div>
 				<span>{isCount}</span> {intl(isLanguage).secondCompleteToGo}
 			</div>
 		);
 	}
-	if (data?.length >= isMax) {
+	if (isCount >= isMax) {
 		return (
 			<div>
 				<span>{isCount}</span> {intl(isLanguage).thirdCompleteToGo}
