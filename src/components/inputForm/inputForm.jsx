@@ -23,15 +23,15 @@ const InputForm = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsShown('hidden');
-		}, 10000);
+		}, 5000);
 	}, [isShown]);
 
-	const isListHandler = () => {
+	const isListHandler = (responseObj) => {
 		const objectLength = (obj) => Object.entries(obj).length;
 		setCount(objectLength(isList) + 1);
 		setisList((oldList) => ({
 			...oldList,
-			[Object.keys(oldList).length]: { text: `${inputedValue}` },
+			[Object.keys(oldList).length]: responseObj?.newTodo,
 		}));
 	};
 
@@ -44,10 +44,11 @@ const InputForm = () => {
 
 	const handleKeyPressAdd = (e) => {
 		if (e.key === 'Enter') {
-			addTodo(inputedValue);
+			addTodo(inputedValue).then((res) => {
+				isListHandler(res);
+			});
 			setInputedValue('');
 			setisUploaded(!isUploaded);
-			isListHandler();
 		}
 	};
 	return (

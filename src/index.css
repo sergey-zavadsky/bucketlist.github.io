@@ -86,7 +86,6 @@ header,
 .todo-title {
 	width: 80%;
 	min-width: 80%;
-	align-self: center;
 	word-wrap: break-word;
 	padding: 3px;
 	background-color: rgb(59, 59, 64);
@@ -207,5 +206,4 @@ input:focus {
 	outline: none;
 	color: var(--text);
 	border-radius: 5px;
-	min-height: auto;
 }

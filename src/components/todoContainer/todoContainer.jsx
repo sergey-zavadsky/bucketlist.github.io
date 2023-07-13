@@ -23,10 +23,6 @@ const TodoContainer = () => {
 		fetchData();
 	}, []);
 
-	useEffect(() => {
-		console.log(isList);
-	}, [isUploaded]);
-
 	const deleteHandler = (param) => {
 		const array = Object.values(isList).filter((ele) => ele._id !== param._id);
 		let newObject = Object.fromEntries(
