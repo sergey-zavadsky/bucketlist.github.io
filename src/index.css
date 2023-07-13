@@ -3,18 +3,15 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
 .light-theme {
 	--background: #ffffff;
 	--text: #000000;
 }
-
 .dark-theme {
 	--background: rgba(52, 53, 65, 1);
 	--text: #f8f8f2;
 	--background-list: #292828;
 }
-
 #root {
 	height: 100vh;
 	width: 100%;
@@ -22,43 +19,22 @@
 	color: var(--text);
 	overflow-y: auto;
 }
-
 html,
 body {
-	/* height: 100%; */
 }
-
-/* body {
-	background-image: linear-gradient(120deg, #f69635, #fda085, #49b733);
-	color: white;
-	font-family: sans-serif;
-	min-height: 100vh;
-} */
-
 header {
 	font-size: 1.5rem;
 }
-
 header,
 .App {
 }
-
 .App input,
 .App button {
 }
-
 .App button {
-	/* color: #f69635;
-	background: white;
-	cursor: pointer;
-	transition: all 0.3s ease; */
 }
-
 .App button:hover {
-	/* background-color: #dfafa2;
-	color: white; */
 }
-
 .todo-container {
 	display: flex;
 }
@@ -69,29 +45,24 @@ header,
 	border-radius: 5px;
 	background-color: rgb(59, 59, 64);
 	border-style: none;
-	/* padding-left: 2vh; */
 	color: var(--text);
 	margin-bottom: 2vh;
 	margin-top: 2vh;
 	overflow: hidden;
 	height: auto;
 }
-
 #button {
 	background-color: var(--background-list);
 }
-
 .todo-textarea-container:focus-within {
 	background-color: var(--background-list);
 }
-
 .todo-list {
 	width: 70%;
 	margin-left: 15%;
 	margin-right: 15%;
 	margin-bottom: 15%;
 }
-
 .todo-title {
 	width: 80%;
 	min-width: 80%;
@@ -104,51 +75,18 @@ header,
 	min-height: 8vh;
 	height: 100%;
 }
-
 .todo-title:focus,
 input:focus {
 	background-color: #292828;
 	outline: 0;
 	border-radius: inherit;
-	/* padding-left: 2.5vh; */
 }
 .todo-title:focus {
 	border-radius: 0 0 0 0;
 }
-
 .button-title {
 	width: 20%;
 }
-
-.success {
-	/* display: flex;
-	gap: 15px;
-	background-color: #efe;
-	border: 1px solid #ded;
-	color: #9a9; */
-}
-
-.alert {
-	/* position: relative;
-	top: 10;
-	left: 0;
-	width: auto;
-	height: auto;
-	padding: 10px;
-	margin: 10px;
-	line-height: 1.8;
-	border-radius: 5px;
-	cursor: hand;
-	cursor: pointer;
-	font-family: sans-serif;
-	font-weight: 400; */
-}
-
-.main {
-	/* height: 100%;
-	width: 100%; */
-}
-
 .absolute-bottom {
 	position: absolute;
 	display: flex;
@@ -167,7 +105,6 @@ input:focus {
 .todo-title:focus-within {
 	background-color: #292828;
 }
-
 .todo-input {
 	width: 80%;
 	height: 100%;
@@ -178,6 +115,11 @@ input:focus {
 	color: var(--text);
 	font-size: large;
 }
+.todo-input:focus {
+	outline: none;
+	color: var(--text);
+	border-radius: 5px 0 0 5px;
+}
 .todo-button {
 	width: 20%;
 	border-radius: 0 5px 5px 0;
@@ -187,18 +129,16 @@ input:focus {
 	font-size: large;
 	cursor: pointer;
 }
-
 .todo-button-list {
 	width: 10%;
-	border-radius: 5px;
+	border-radius: 0;
 	background-color: rgb(68 70 91 / 63%);
 	border-style: none;
 	color: var(--text);
 	font-size: large;
 	cursor: pointer;
-	margin: 5px;
+	margin: 0px 0px 0px 5px;
 }
-
 .marked {
 	width: 10%;
 	background-color: rgb(68 70 91 / 63%);
@@ -206,11 +146,5 @@ input:focus {
 	color: var(--text);
 	font-size: large;
 	cursor: pointer;
-	border-radius: 5px;
-}
-
-.todo-input:focus {
-	outline: none;
-	color: var(--text);
 	border-radius: 5px;
 }
