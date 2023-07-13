@@ -36,10 +36,11 @@ const InputForm = () => {
 	};
 
 	const inputHandler = async () => {
-		addTodo(inputedValue);
+		addTodo(inputedValue).then((res) => {
+			isListHandler(res);
+		});
 		setInputedValue('');
 		setisUploaded(!isUploaded);
-		isListHandler();
 	};
 
 	const handleKeyPressAdd = (e) => {

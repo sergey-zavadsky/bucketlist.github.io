@@ -48,10 +48,10 @@ const TodoContainer = () => {
 								className="todo-title"
 								onClick={() => editItemHandler()}
 								// onChange={(e) => setText(e.target.value)}
-								defaultValue={value.text}
+								defaultValue={value?.text}
 							></textarea>
 							<button
-								className="marked"
+								className="todo-button-list"
 								onClick={() => {
 									deleteTodo(value._id);
 									setisUploaded(!isUploaded);

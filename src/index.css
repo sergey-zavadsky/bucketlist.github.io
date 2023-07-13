@@ -12,6 +12,7 @@
 .dark-theme {
 	--background: rgba(52, 53, 65, 1);
 	--text: #f8f8f2;
+	--background-list: #292828;
 }
 
 #root {
@@ -72,8 +73,16 @@ header,
 	color: var(--text);
 	margin-bottom: 2vh;
 	margin-top: 2vh;
-
 	overflow: hidden;
+	height: auto;
+}
+
+#button {
+	background-color: var(--background-list);
+}
+
+.todo-textarea-container:focus-within {
+	background-color: var(--background-list);
 }
 
 .todo-list {
@@ -93,6 +102,7 @@ header,
 	color: (var(--text));
 	padding-left: 2vh;
 	min-height: 8vh;
+	height: 100%;
 }
 
 .todo-title:focus,
@@ -100,10 +110,10 @@ input:focus {
 	background-color: #292828;
 	outline: 0;
 	border-radius: inherit;
-	padding-left: 2.5vh;
+	/* padding-left: 2.5vh; */
 }
 .todo-title:focus {
-	min-height: 100px;
+	border-radius: 0 0 0 0;
 }
 
 .button-title {
@@ -149,16 +159,12 @@ input:focus {
 	height: 45px;
 }
 .absolute-bottom:focus-within:active {
-	/* outline: auto; */
 	color: var(--text);
 	border: 0px solid;
-	/* outline-style: solid;
-	outline-color: none;
-	outline-width: medium; */
 	border-radius: inherit;
 	background-color: #292828;
 }
-.todo-input:focus-within {
+.todo-title:focus-within {
 	background-color: #292828;
 }
 
@@ -184,13 +190,15 @@ input:focus {
 
 .todo-button-list {
 	width: 10%;
-	border-radius: 0 5px 5px 0;
+	border-radius: 5px;
 	background-color: rgb(68 70 91 / 63%);
 	border-style: none;
 	color: var(--text);
 	font-size: large;
 	cursor: pointer;
+	margin: 5px;
 }
+
 .marked {
 	width: 10%;
 	background-color: rgb(68 70 91 / 63%);
@@ -198,15 +206,10 @@ input:focus {
 	color: var(--text);
 	font-size: large;
 	cursor: pointer;
-
-	border-radius: 0 0 0 0;
+	border-radius: 5px;
 }
 
-/* .todo-button:focus-within {
-} */
-
-.todo-input:focus,
-:active {
+.todo-input:focus {
 	outline: none;
 	color: var(--text);
 	border-radius: 5px;
