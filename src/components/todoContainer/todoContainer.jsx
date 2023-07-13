@@ -1,17 +1,17 @@
 import { getTodos } from '../../api/getTodos';
 import { useEffect, useState } from 'react';
 import { deleteTodo } from '../../api/deleteTodo';
-import { isUploadedState, isCountState } from '../../app/stores';
+import { isUploadedState, isCountState, isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';
 
 const TodoContainer = () => {
-	const [todos, setTodos] = useState([]);
+	const [isList, setisList] = useRecoilState(isListState);
 	const [isCount, setCount] = useRecoilState(isCountState);
 	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
 	const fetchData = async () => {
 		try {
 			const res = await getTodos();
-			setTodos(res);
+			setisList(res);
 			const objectLength = (obj) => Object.entries(obj).length;
 			setCount(objectLength(res));
 		} catch (error) {
@@ -21,12 +21,25 @@ const TodoContainer = () => {
 
 	useEffect(() => {
 		fetchData();
+	}, []);
+
+	useEffect(() => {
+		console.log(isList);
 	}, [isUploaded]);
+
+	const deleteHandler = (param) => {
+		const array = Object.values(isList).filter((ele) => ele._id !== param._id);
+		let newObject = Object.fromEntries(
+			array.map((item, index) => [index.toString(), item]),
+		);
+
+		setisList(newObject);
+	};
 
 	return (
 		<div className="todo-container">
 			<ul className="todo-list">
-				{Object.entries(todos).map(([key, value]) => {
+				{Object.entries(isList).map(([key, value]) => {
 					return (
 						<div className="todo" key={value._id}>
 							<div className="todo-title">{value.text}</div>
@@ -35,6 +48,7 @@ const TodoContainer = () => {
 								onClick={() => {
 									deleteTodo(value._id);
 									setisUploaded(!isUploaded);
+									deleteHandler(value);
 								}}
 							>
 								-

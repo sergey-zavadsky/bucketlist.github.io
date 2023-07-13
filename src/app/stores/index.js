@@ -9,3 +9,8 @@ export const isCountState = atom({
 	key: 'isCountState',
 	default: 0,
 });
+
+export const isListState = atom({
+	key: 'isListState',
+	default: [],
+});

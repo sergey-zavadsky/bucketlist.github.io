@@ -16,11 +16,6 @@ const CompleteToGo = () => {
 		return state.switchLanguage.currentLanguage;
 	});
 
-	useEffect(() => {
-		// setComplete(data?.length || 0);
-		console.log(data);
-	}, [data]);
-
 	if (data?.length < isMax) {
 		return (
 			<div>

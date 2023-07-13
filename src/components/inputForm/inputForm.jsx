@@ -4,10 +4,11 @@ import { tr as intl } from '../local';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { addTodo } from '../../api/addTodo';
-import { isUploadedState } from '../../app/stores';
+import { isUploadedState, isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';
 
 const InputForm = () => {
+	const [isList, setisList] = useRecoilState(isListState);
 	const [inputedValue, setInputedValue] = useState('');
 	const [isShown, setIsShown] = useState('hidden');
 	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
@@ -24,17 +25,26 @@ const InputForm = () => {
 		}, 10000);
 	}, [isShown]);
 
+	const isListHandler = () => {
+		setisList((oldList) => ({
+			...oldList,
+			[Object.keys(oldList).length]: { text: `${inputedValue}` },
+		}));
+	};
+
 	const inputHandler = async () => {
 		addTodo(inputedValue);
 		setInputedValue('');
 		setisUploaded(!isUploaded);
+		isListHandler();
 	};
 
 	const handleKeyPressAdd = (e) => {
 		if (e.key === 'Enter') {
-			addTodo(inputedValue);
+			addTodo(inputedValue).then((res) => console.log(res));
 			setInputedValue('');
 			setisUploaded(!isUploaded);
+			isListHandler();
 		}
 	};
 	return (
