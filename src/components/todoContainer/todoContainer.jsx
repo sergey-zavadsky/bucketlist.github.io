@@ -38,6 +38,9 @@ const TodoContainer = () => {
 
 		setisList(newObject);
 	};
+	const editItemHandler = () => {
+		console.log('editMode');
+	};
 
 	return (
 		<div className="todo-container">
@@ -45,7 +48,12 @@ const TodoContainer = () => {
 				{Object.entries(isList).map(([key, value]) => {
 					return (
 						<div className="todo" key={value._id}>
-							<div className="todo-title">{value.text}</div>
+							<textarea
+								className="todo-title"
+								onClick={() => editItemHandler()}
+								// onChange={(e) => setText(e.target.value)}
+								defaultValue={value.text}
+							></textarea>
 							<button
 								className="marked"
 								onClick={() => {

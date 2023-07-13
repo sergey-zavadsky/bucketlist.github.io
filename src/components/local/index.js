@@ -9,6 +9,7 @@ const tr = (key) => {
 				firstCompleteToGo: 'желаний добавлено, добавь еще ',
 				secondCompleteToGo: 'желаний добавлено! Поздравляю!',
 				thirdCompleteToGo: 'желаний добавлено.',
+				customRangeSlider: 'Слайдер',
 			};
 		case 'BY':
 			return {
@@ -19,6 +20,7 @@ const tr = (key) => {
 				firstCompleteToGo: 'жадання дадазена, дадай яшчэ ',
 				secondCompleteToGo: 'жадання дадана! Віншую!',
 				thirdCompleteToGo: 'жадання дадана.',
+				customRangeSlider: 'Слайдэр',
 			};
 		default:
 			break;

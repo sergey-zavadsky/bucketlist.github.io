@@ -68,7 +68,7 @@ header,
 	border-radius: 5px;
 	background-color: rgb(59, 59, 64);
 	border-style: none;
-	padding-left: 2vh;
+	/* padding-left: 2vh; */
 	color: var(--text);
 	margin-bottom: 2vh;
 	margin-top: 2vh;
@@ -85,10 +85,24 @@ header,
 
 .todo-title {
 	width: 80%;
+	min-width: 80%;
 	align-self: center;
 	word-wrap: break-word;
 	padding: 3px;
+	background-color: rgb(59, 59, 64);
+	border: none;
+	color: (var(--text));
+	padding-left: 2vh;
 }
+
+.todo-title:focus,
+input:focus {
+	background-color: #292828;
+	outline: 0;
+	border-radius: inherit;
+	padding-left: 2.5vh;
+}
+
 .button-title {
 	width: 20%;
 }
@@ -132,13 +146,13 @@ header,
 	height: 45px;
 }
 .absolute-bottom:focus-within:active {
-	outline: auto;
+	/* outline: auto; */
 	color: var(--text);
 	border: 0px solid;
-	outline-style: solid;
-	outline-color: rgb(124, 141, 140);
-	outline-width: medium;
-	border-radius: 5px;
+	/* outline-style: solid;
+	outline-color: none;
+	outline-width: medium; */
+	border-radius: inherit;
 	background-color: #292828;
 }
 .todo-input:focus-within {
@@ -188,7 +202,10 @@ header,
 /* .todo-button:focus-within {
 } */
 
-.todo-input:focus {
+.todo-input:focus,
+:active {
 	outline: none;
 	color: var(--text);
+	border-radius: 5px;
+	min-height: auto;
 }
