@@ -1,5 +1,5 @@
 import { getTodos } from '../../api/getTodos';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { deleteTodo } from '../../api/deleteTodo';
 import { isUploadedState, isCountState, isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';

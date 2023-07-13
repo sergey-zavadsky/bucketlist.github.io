@@ -92,6 +92,7 @@ header,
 	border: none;
 	color: (var(--text));
 	padding-left: 2vh;
+	min-height: 8vh;
 }
 
 .todo-title:focus,
@@ -100,6 +101,9 @@ input:focus {
 	outline: 0;
 	border-radius: inherit;
 	padding-left: 2.5vh;
+}
+.todo-title:focus {
+	min-height: 100px;
 }
 
 .button-title {
