@@ -114,6 +114,7 @@ input:focus {
 	padding-left: 2vh;
 	color: var(--text);
 	font-size: large;
+	z-index: 2;
 }
 .todo-input:focus {
 	outline: none;

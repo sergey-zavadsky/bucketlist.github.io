@@ -57,7 +57,7 @@ const InputForm = () => {
 			<div className="App">
 				<div className={`success alert ${isShown}`}>
 					<p>{intl(isLanguage).emptyError}</p>
-					<div onClick={() => setIsShown('hidden')}>X</div>
+					<div onClick={() => setIsShown('hidden')} />
 				</div>
 				<div className="absolute-bottom">
 					<input
