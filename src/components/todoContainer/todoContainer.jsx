@@ -1,13 +1,19 @@
 import { getTodos } from '../../api/getTodos';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { deleteTodo } from '../../api/deleteTodo';
 import { isUploadedState, isCountState, isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';
+import { updateTodo } from '../../api/updateTodo';
 
 const TodoContainer = () => {
 	const [isList, setisList] = useRecoilState(isListState);
 	const [isCount, setCount] = useRecoilState(isCountState);
 	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
+	const [isTextAreaValue, setTextArea] = useState('');
+	const [isFocusedButton, setIsFocusedButton] = useState(false);
+
+	const ref = useRef(null);
+
 	const fetchData = async () => {
 		try {
 			const res = await getTodos();
@@ -34,9 +40,21 @@ const TodoContainer = () => {
 
 		setisList(newObject);
 	};
-	const editItemHandler = () => {
-		console.log('editMode');
+
+	const isListHandlerUpdate = (responseObj) => {
+		setisList((oldList) => ({
+			...oldList,
+		}));
 	};
+
+	const editItemHandler = async (inputedValue, id, fvalue) => {
+		updateTodo(inputedValue, id).then((res) => {
+			isListHandlerUpdate(res);
+		});
+	};
+
+	const buttonIconSubmit = '✓';
+	const buttonIconPencil = '✏️';
 
 	return (
 		<div className="todo-container">
@@ -46,9 +64,12 @@ const TodoContainer = () => {
 						<div className="todo" key={value._id}>
 							<textarea
 								className="todo-title"
-								onClick={() => editItemHandler()}
-								// onChange={(e) => setText(e.target.value)}
 								defaultValue={value?.text}
+								onChange={(e) => setTextArea(e.target.value)}
+								// onBlur={() => editItemHandler(isTextAreaValue, value._id)}
+								ref={ref}
+								onBlur={() => setIsFocusedButton(true)}
+								onFocus={() => setIsFocusedButton(false)}
 							></textarea>
 							<button
 								className="todo-button-list"
@@ -62,9 +83,11 @@ const TodoContainer = () => {
 							</button>
 							<button
 								className="todo-button-list"
-								onClick={() => console.log('mark todo')}
+								onClick={() => editItemHandler(isTextAreaValue, value._id)}
 							>
-								✓
+								{ref.current && isFocusedButton
+									? buttonIconSubmit
+									: buttonIconPencil}
 							</button>
 						</div>
 					);
