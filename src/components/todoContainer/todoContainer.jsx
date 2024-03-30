@@ -1,13 +1,12 @@
 import { getTodos } from '../../api/getTodos';
 import { useEffect, useRef, useState } from 'react';
 import { deleteTodo } from '../../api/deleteTodo';
-import { isUploadedState, isCountState, isListState } from '../../app/stores';
+import { isUploadedState, isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';
 import { updateTodo } from '../../api/updateTodo';
 
 const TodoContainer = () => {
 	const [isList, setisList] = useRecoilState(isListState);
-	const [isCount, setCount] = useRecoilState(isCountState);
 	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
 	const [isTextAreaValue, setTextArea] = useState('');
 	const [isFocusedButton, setIsFocusedButton] = useState(false);
@@ -18,8 +17,6 @@ const TodoContainer = () => {
 		try {
 			const res = await getTodos();
 			setisList(res);
-			const objectLength = (obj) => Object.entries(obj).length;
-			setCount(objectLength(res));
 		} catch (error) {
 			console.log(error);
 		}
@@ -34,10 +31,6 @@ const TodoContainer = () => {
 		let newObject = Object.fromEntries(
 			array.map((item, index) => [index.toString(), item]),
 		);
-
-		const objectLength = (obj) => Object.entries(obj).length;
-		setCount(objectLength(isList) - 1);
-
 		setisList(newObject);
 	};
 
@@ -59,14 +52,13 @@ const TodoContainer = () => {
 	return (
 		<div className="todo-container">
 			<ul className="todo-list">
-				{Object.entries(isList).map(([key, value]) => {
+				{isList.map((value) => {
 					return (
 						<div className="todo" key={value._id}>
 							<textarea
 								className="todo-title"
 								defaultValue={value?.text}
 								onChange={(e) => setTextArea(e.target.value)}
-								// onBlur={() => editItemHandler(isTextAreaValue, value._id)}
 								ref={ref}
 								onBlur={() => setIsFocusedButton(true)}
 								onFocus={() => setIsFocusedButton(false)}

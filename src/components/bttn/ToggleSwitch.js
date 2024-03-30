@@ -18,7 +18,7 @@ function ToggleSwitch() {
 		<>
 			<label className={`switch ${theme}`}>
 				<input type="checkbox" />
-				<span className="slider round" onClick={handleClick}>
+				<span className="slider round" onClick={() => handleClick()}>
 					<span className="thumb">{theme === 'dark' ? moon : sun}</span>
 				</span>
 			</label>

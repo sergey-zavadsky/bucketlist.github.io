@@ -1,55 +1,27 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { tr as intl } from '../local';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { addTodo } from '../../api/addTodo';
-import { isUploadedState, isListState, isCountState } from '../../app/stores';
-import { useRecoilState } from 'recoil';
 
 const InputForm = () => {
-	const [isList, setisList] = useRecoilState(isListState);
-	const [isCount, setCount] = useRecoilState(isCountState);
 	const [inputedValue, setInputedValue] = useState('');
 	const [isShown, setIsShown] = useState('hidden');
 	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
-
-	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
 
 	const isLanguage = useSelector((state) => {
 		return state.switchLanguage.currentLanguage;
 	});
 
-	useEffect(() => {
-		setTimeout(() => {
-			setIsShown('hidden');
-		}, 5000);
-	}, [isShown]);
-
-	const isListHandler = (responseObj) => {
-		const objectLength = (obj) => Object.entries(obj).length;
-		setCount(objectLength(isList) + 1);
-		setisList((oldList) => ({
-			...oldList,
-			[Object.keys(oldList).length]: responseObj?.newTodo,
-		}));
-	};
-
 	const inputHandler = async () => {
-		addTodo(inputedValue).then((res) => {
-			isListHandler(res);
-		});
+		addTodo(inputedValue);
 		setInputedValue('');
-		setisUploaded(!isUploaded);
 	};
 
 	const handleKeyPressAdd = (e) => {
 		if (e.key === 'Enter') {
-			addTodo(inputedValue).then((res) => {
-				isListHandler(res);
-			});
-			setInputedValue('');
-			setisUploaded(!isUploaded);
+			inputHandler();
 		}
 	};
 	return (
