@@ -1,13 +1,12 @@
 import { getTodos } from '../../api/getTodos';
 import { useEffect, useRef, useState } from 'react';
 import { deleteTodo } from '../../api/deleteTodo';
-import { isUploadedState, isListState } from '../../app/stores';
+import { isListState } from '../../app/stores';
 import { useRecoilState } from 'recoil';
 import { updateTodo } from '../../api/updateTodo';
 
 const TodoContainer = () => {
-	const [isList, setisList] = useRecoilState(isListState);
-	const [isUploaded, setisUploaded] = useRecoilState(isUploadedState);
+	const [isList, setIsList] = useRecoilState(isListState);
 	const [isTextAreaValue, setTextArea] = useState('');
 	const [isFocusedButton, setIsFocusedButton] = useState(false);
 
@@ -16,7 +15,7 @@ const TodoContainer = () => {
 	const fetchData = async () => {
 		try {
 			const res = await getTodos();
-			setisList(res);
+			setIsList(res);
 		} catch (error) {
 			console.log(error);
 		}
@@ -26,23 +25,23 @@ const TodoContainer = () => {
 		fetchData();
 	}, []);
 
+	//* Fixed delete for single item
 	const deleteHandler = (param) => {
-		const array = Object.values(isList).filter((ele) => ele._id !== param._id);
-		let newObject = Object.fromEntries(
-			array.map((item, index) => [index.toString(), item]),
-		);
-		setisList(newObject);
+		deleteTodo(param._id);
+		setIsList((prevList) => prevList.filter((ele) => ele._id !== param._id));
 	};
 
-	const isListHandlerUpdate = (responseObj) => {
-		setisList((oldList) => ({
-			...oldList,
-		}));
-	};
-
-	const editItemHandler = async (inputedValue, id, fvalue) => {
-		updateTodo(inputedValue, id).then((res) => {
-			isListHandlerUpdate(res);
+	//*Fixed update for single item
+	const updateItemHandler = (inputedValue, id) => {
+		updateTodo(inputedValue, id);
+		setIsList((prevList) => {
+			return prevList.map((item) => {
+				if (item._id === id) {
+					return { ...item, text: inputedValue };
+				} else {
+					return item;
+				}
+			});
 		});
 	};
 
@@ -58,7 +57,7 @@ const TodoContainer = () => {
 							<textarea
 								className="todo-title"
 								defaultValue={value?.text}
-								onChange={(e) => setTextArea(e.target.value)}
+								onChange={(e) => setTextArea(e.currentTarget.value)}
 								ref={ref}
 								onBlur={() => setIsFocusedButton(true)}
 								onFocus={() => setIsFocusedButton(false)}
@@ -66,8 +65,6 @@ const TodoContainer = () => {
 							<button
 								className="todo-button-list"
 								onClick={() => {
-									deleteTodo(value._id);
-									setisUploaded(!isUploaded);
 									deleteHandler(value);
 								}}
 							>
@@ -75,7 +72,7 @@ const TodoContainer = () => {
 							</button>
 							<button
 								className="todo-button-list"
-								onClick={() => editItemHandler(isTextAreaValue, value._id)}
+								onClick={() => updateItemHandler(isTextAreaValue, value._id)}
 							>
 								{ref.current && isFocusedButton
 									? buttonIconSubmit

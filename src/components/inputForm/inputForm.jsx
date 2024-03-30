@@ -1,11 +1,14 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { tr as intl } from '../local';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { addTodo } from '../../api/addTodo';
+import { useRecoilState } from 'recoil';
+import { isListState } from '../../app/stores';
 
 const InputForm = () => {
+	const [isList, setIsList] = useRecoilState(isListState);
 	const [inputedValue, setInputedValue] = useState('');
 	const [isShown, setIsShown] = useState('hidden');
 	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
@@ -15,7 +18,18 @@ const InputForm = () => {
 	});
 
 	const inputHandler = async () => {
-		addTodo(inputedValue);
+		addTodo(inputedValue).then((response) => {
+			setIsList((prevList) => {
+				return [
+					...prevList,
+					{
+						text: inputedValue,
+						_id: response.newTodo._id,
+					},
+				];
+			});
+		});
+
 		setInputedValue('');
 	};
 
