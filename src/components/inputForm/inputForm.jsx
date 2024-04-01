@@ -1,30 +1,31 @@
 import { React, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { tr as intl } from '../local';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { addTodo } from '../../api/addTodo';
 import { useRecoilState } from 'recoil';
 import { isListState } from '../../app/stores';
+import styles from './inputForm.module.scss';
+import { Button } from '../bttn/Button';
+import { Input } from '../input/Input';
+import { tr as intl } from '../local';
+import { useSelector } from 'react-redux';
 
 const InputForm = () => {
 	const [isList, setIsList] = useRecoilState(isListState);
 	const [inputedValue, setInputedValue] = useState('');
-	const [isShown, setIsShown] = useState('hidden');
 	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
 
-	const isLanguage = useSelector((state) => {
-		return state.switchLanguage.currentLanguage;
-	});
-
 	const inputHandler = async () => {
+		if (!inputedValue) {
+			return;
+		}
 		addTodo(inputedValue).then((response) => {
 			setIsList((prevList) => {
 				return [
 					...prevList,
 					{
 						text: inputedValue,
-						_id: response.newTodo._id,
+						_id: response._id,
 					},
 				];
 			});
@@ -35,41 +36,33 @@ const InputForm = () => {
 
 	const handleKeyPressAdd = (e) => {
 		if (e.key === 'Enter') {
-			inputHandler();
+			return inputHandler();
 		}
 	};
-	return (
-		<div>
-			<div className="App">
-				<div className={`success alert ${isShown}`}>
-					<p>{intl(isLanguage).emptyError}</p>
-					<div onClick={() => setIsShown('hidden')} />
-				</div>
-				<div className="absolute-bottom">
-					<input
-						value={inputedValue}
-						placeholder={intl(isLanguage).placeholder}
-						type="text"
-						onKeyUp={(e) => {
-							inputedValue ? handleKeyPressAdd(e) : setIsShown('show');
-						}}
-						className="todo-input"
-						onChange={(e) => setInputedValue(e.target.value)}
-					></input>
+	const handleSubmit = (event) => {
+		event.preventDefault();
+	};
 
-					<button
-						type="button"
-						className="todo-button"
-						onClick={() => {
-							inputedValue
-								? inputedValue && inputHandler()
-								: setIsShown('show');
-						}}
-					>
-						{plane}
-					</button>
-				</div>
-			</div>
+	const isLanguage = useSelector((state) => {
+		return state.switchLanguage.currentLanguage;
+	});
+
+	return (
+		<div className={styles['absolute-bottom']}>
+			<form onSubmit={handleSubmit} className={styles['todo-input-form']}>
+				<Input
+					className={styles['todo-input']}
+					placeholder={intl(isLanguage).placeholder}
+					onKeyUp={handleKeyPressAdd}
+					value={inputedValue}
+					onChange={(e) => setInputedValue(e.target.value)}
+				/>
+				<Button
+					className={styles['todo-button']}
+					onClick={inputHandler}
+					text={plane}
+				/>
+			</form>
 		</div>
 	);
 };

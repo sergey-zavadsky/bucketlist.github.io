@@ -1,0 +1,7 @@
+@use '../../variables.scss' as v;
+
+.language-switcher {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}

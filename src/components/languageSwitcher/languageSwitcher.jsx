@@ -2,11 +2,18 @@ import { useDispatch } from 'react-redux';
 import { switchLanguage } from '../reducers/languageSwitcher/languageSwitcherReducer';
 import { tr as intl } from '../local/index';
 import { useSelector } from 'react-redux';
+import styles from './languageSwitcher.module.scss';
+import ornament from './ornament.svg';
+import { useState } from 'react';
 
 const LanguageSwitcher = () => {
 	const dispatch = useDispatch();
+
+	const [isBel, setIsBel] = useState(true);
+
 	const handleLanguageChange = (newLanguageCode) => {
-		dispatch(switchLanguage(newLanguageCode.target.value));
+		dispatch(switchLanguage(!isBel ? 'BY' : 'RU'));
+		setIsBel(!isBel);
 	};
 
 	const isLanguage = useSelector((state) => {
@@ -14,16 +21,17 @@ const LanguageSwitcher = () => {
 	});
 
 	return (
-		<div>
-			<label htmlFor="languages">{intl(isLanguage).changeLanguage}</label>
-			<select
-				name="languages"
-				id="languages"
-				onChange={(event) => handleLanguageChange(event)}
-			>
-				<option value="BY">BY</option>
-				<option value="RU">RU</option>
-			</select>
+		<div className={styles['language-switcher']}>
+			{intl(isLanguage).changeLanguage}
+			<button onClick={() => handleLanguageChange()}>
+				{isBel ? (
+					<>
+						<img src={ornament} alt="БЕЛ" /> БЕЛ
+					</>
+				) : (
+					'РУС'
+				)}
+			</button>
 		</div>
 	);
 };

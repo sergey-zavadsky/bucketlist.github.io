@@ -1,0 +1,54 @@
+@use '../../variables.scss' as v;
+
+.todo-list {
+	margin: 5px 0 5px 0;
+}
+
+.absolute-bottom {
+	position: absolute;
+	display: flex;
+	bottom: 3vh;
+
+	border-radius: 5px 0 0 5px;
+}
+
+.todo-input {
+	border-radius: 5px 0 0 5px;
+	background-color: rgb(59, 59, 64);
+	border-style: none;
+	padding-left: 2vh;
+	//* pointer color
+	color: v.$text;
+	font-size: large;
+	z-index: 2;
+	width: 60vh;
+	outline: none;
+	&:focus-within {
+		background-color: v.$bg-active;
+	}
+}
+.todo-input-form {
+	display: flex;
+	color: v.$text;
+	padding: 5px;
+	min-height: 55px;
+}
+
+.todo-input-form:focus-within {
+	::placeholder {
+		color: v.$text;
+	}
+}
+
+.todo-button {
+	color: v.$text;
+	cursor: pointer;
+	background-color: v.$bg-clickable-items;
+	border-style: none;
+	min-width: 15vw;
+	border-radius: 0px 5px 5px 0px;
+	&:active {
+		outline: none;
+		background-color: v.$bg-active;
+	}
+}

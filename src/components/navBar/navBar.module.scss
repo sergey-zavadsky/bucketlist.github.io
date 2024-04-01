@@ -1,0 +1,17 @@
+@use '../../variables.scss' as v;
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 70%;
+
+	h1 {
+		float: left;
+		color: v.$text;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 35px;
+	}
+}
