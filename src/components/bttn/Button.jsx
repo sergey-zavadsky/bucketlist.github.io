@@ -5,10 +5,12 @@ export const Button = ({
 	className,
 	borderRadius,
 	onSubmit,
+	minWidth,
 }) => {
 	const buttonStyle = {
 		fontSize: fontSize + 'px',
 		borderRadius: `${borderRadius}px`,
+		minWidth: `${minWidth}vw`,
 	};
 
 	return (

@@ -119,12 +119,14 @@ const TodoContainer = () => {
 							className={styles['todo-button']}
 							onClick={() => updateItemHandler(values[i], value._id)}
 							text={isFocusedButton[i] ? buttonIconPencil : buttonIconSubmit}
+							minWidth={7}
 						/>
 
 						<Button
 							className={styles['todo-button']}
 							onClick={(e) => deleteHandler(e, value)}
 							text={intl(isLanguage).deleteItem}
+							minWidth={7}
 						/>
 					</form>
 				);
