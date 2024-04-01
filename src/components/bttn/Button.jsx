@@ -6,11 +6,13 @@ export const Button = ({
 	borderRadius,
 	onSubmit,
 	minWidth,
+	padding,
 }) => {
 	const buttonStyle = {
 		fontSize: fontSize + 'px',
 		borderRadius: `${borderRadius}px`,
 		minWidth: `${minWidth}vw`,
+		padding: `${padding}px`,
 	};
 
 	return (
