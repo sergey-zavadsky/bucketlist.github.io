@@ -13,6 +13,7 @@ import { tr as intl } from '../local';
 const TodoContainer = () => {
 	const [isList, setIsList] = useRecoilState(isListState);
 	const [isFocusedButton, setIsFocusedButton] = useState([]);
+	const [isDone, setIsDone] = useState([]);
 	const [values, setValues] = useState([]);
 	const isLanguage = useSelector((state) => {
 		return state.switchLanguage.currentLanguage;
@@ -34,6 +35,7 @@ const TodoContainer = () => {
 	useEffect(() => {
 		setIsFocusedButton(isList.map(() => false));
 		setValues(isList.map((item) => item.text));
+		setIsDone(isList.map((item) => item.isDone));
 	}, [isList]);
 
 	//* Fixed delete for single item
@@ -44,12 +46,12 @@ const TodoContainer = () => {
 	};
 
 	//*Fixed update for single item
-	const updateItemHandler = (inputedValue, id) => {
-		updateTodo(inputedValue, id);
+	const updateItemHandler = (inputedValue, id, isDone) => {
+		updateTodo(inputedValue, id, isDone);
 		setIsList((prevList) => {
 			return prevList.map((item) => {
 				if (item._id === id) {
-					return { ...item, text: inputedValue };
+					return { ...item, text: inputedValue, isDone: isDone };
 				} else {
 					return item;
 				}
@@ -105,7 +107,11 @@ const TodoContainer = () => {
 					>
 						<Input
 							value={values[i] || ''}
-							className={styles['todo-input']}
+							className={
+								isDone[i] && !isFocusedButton[i]
+									? `${styles['todo-input']} ${styles['todo-input-isDone']}`
+									: styles['todo-input']
+							}
 							onChange={(e) => handleTextChange(i, e)}
 							onFocus={() => handleFocus(i)}
 							onBlur={() => {
@@ -117,8 +123,12 @@ const TodoContainer = () => {
 						<Button
 							borderRadius={0}
 							className={styles['todo-button']}
-							onClick={() => updateItemHandler(values[i], value._id)}
-							text={isFocusedButton[i] ? buttonIconPencil : buttonIconSubmit}
+							onClick={() =>
+								isDone[i] && isFocusedButton[i]
+									? updateItemHandler(values[i], value._id, isDone[i])
+									: updateItemHandler(values[i], value._id, !isDone[i])
+							}
+							text={isDone[i] ? buttonIconPencil : buttonIconSubmit}
 							minWidth={7}
 						/>
 

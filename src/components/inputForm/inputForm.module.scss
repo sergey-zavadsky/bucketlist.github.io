@@ -27,6 +27,11 @@
 	&:focus-within {
 		background-color: v.$bg-active;
 	}
+
+	&-isDone {
+		color: grey;
+		text-decoration: line-through;
+	}
 }
 .todo-input-form {
 	display: flex;
