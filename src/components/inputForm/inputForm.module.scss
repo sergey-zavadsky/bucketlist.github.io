@@ -3,13 +3,11 @@
 .todo-list {
 	margin: 5px 0 5px 0;
 	height: 70vh;
+	overflow: scroll;
 }
 
 .absolute-bottom {
-	position: absolute;
 	display: flex;
-	bottom: 3vh;
-
 	border-radius: 5px 0 0 5px;
 }
 
