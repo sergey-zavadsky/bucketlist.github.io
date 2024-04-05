@@ -46,6 +46,7 @@
 }
 
 .todo-button {
+	transition: 0.2s ease-in-out;
 	color: v.$text;
 	cursor: pointer;
 	background-color: v.$bg-clickable-items;
