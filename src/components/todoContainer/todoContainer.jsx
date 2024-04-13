@@ -110,7 +110,7 @@ const TodoContainer = () => {
 								<Input
 									value={value?.text || ''}
 									className={
-										isDone[i] && !isFocusedButton[i]
+										value.isDone && !isFocusedButton[i]
 											? `${styles['todo-input']} ${styles['todo-input-isDone']}`
 											: styles['todo-input']
 									}
