@@ -9,6 +9,8 @@ import { Button } from '../bttn/Button';
 import styles from '../inputForm/inputForm.module.scss';
 import { useSelector } from 'react-redux';
 import { tr as intl } from '../local';
+import { Item } from '../reorder/reOrder';
+import { Reorder } from 'framer-motion';
 
 const TodoContainer = () => {
 	const [isList, setIsList] = useRecoilState(isListState);
@@ -34,7 +36,7 @@ const TodoContainer = () => {
 
 	useEffect(() => {
 		setIsFocusedButton(isList.map(() => false));
-		setValues(isList.map((item) => item.text));
+		setValues(isList.map((item) => item));
 		setIsDone(isList.map((item) => item.isDone));
 	}, [isList]);
 
@@ -95,52 +97,53 @@ const TodoContainer = () => {
 
 	const buttonIconSubmit = '✓';
 	const buttonIconPencil = '✏️';
-
+	console.log(isList);
 	return (
 		<ul className={styles['todo-list']}>
-			{isList.map((value, i) => {
-				return (
-					<form
-						onSubmit={handleSubmit}
-						key={i}
-						className={styles['todo-input-form']}
-					>
-						<Input
-							value={values[i] || ''}
-							className={
-								isDone[i] && !isFocusedButton[i]
-									? `${styles['todo-input']} ${styles['todo-input-isDone']}`
-									: styles['todo-input']
-							}
-							onChange={(e) => handleTextChange(i, e)}
-							onFocus={() => handleFocus(i)}
-							onBlur={() => {
-								handleBlur(i);
-							}}
-							onKeyUp={(e) => handleKeyPressAdd(e)}
-						></Input>
-
-						<Button
-							borderRadius={0}
-							className={styles['todo-button']}
-							onClick={() =>
-								isDone[i] && isFocusedButton[i]
-									? updateItemHandler(values[i], value._id, isDone[i])
-									: updateItemHandler(values[i], value._id, !isDone[i])
-							}
-							text={isDone[i] ? buttonIconPencil : buttonIconSubmit}
-							minWidth={7}
-						/>
-
-						<Button
-							className={styles['todo-button']}
-							onClick={(e) => deleteHandler(e, value)}
-							text={intl(isLanguage).deleteItem}
-							minWidth={7}
-						/>
-					</form>
-				);
-			})}
+			<Reorder.Group axis="y" onReorder={setValues} values={values}>
+				{values.map((value, i) => {
+					return (
+						<Reorder.Item value={value} key={value._id}>
+							<form
+								onSubmit={handleSubmit}
+								className={styles['todo-input-form']}
+							>
+								<Input
+									value={value?.text || ''}
+									className={
+										isDone[i] && !isFocusedButton[i]
+											? `${styles['todo-input']} ${styles['todo-input-isDone']}`
+											: styles['todo-input']
+									}
+									onChange={(e) => handleTextChange(i, e)}
+									onFocus={() => handleFocus(i)}
+									onBlur={() => {
+										handleBlur(i);
+									}}
+									onKeyUp={(e) => handleKeyPressAdd(e)}
+								></Input>
+								<Button
+									borderRadius={0}
+									className={styles['todo-button']}
+									onClick={() =>
+										isDone[i] && isFocusedButton[i]
+											? updateItemHandler(values[i].text, value._id, isDone[i])
+											: updateItemHandler(values[i].text, value._id, !isDone[i])
+									}
+									text={isDone[i] ? buttonIconPencil : buttonIconSubmit}
+									minWidth={7}
+								/>
+								<Button
+									className={styles['todo-button']}
+									onClick={(e) => deleteHandler(e, value)}
+									text={intl(isLanguage).deleteItem}
+									minWidth={7}
+								/>
+							</form>
+						</Reorder.Item>
+					);
+				})}
+			</Reorder.Group>
 		</ul>
 	);
 };
