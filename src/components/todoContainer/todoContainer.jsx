@@ -9,7 +9,6 @@ import { Button } from '../bttn/Button';
 import styles from '../inputForm/inputForm.module.scss';
 import { useSelector } from 'react-redux';
 import { tr as intl } from '../local';
-import { Item } from '../reorder/reOrder';
 import { Reorder } from 'framer-motion';
 
 const TodoContainer = () => {
@@ -63,7 +62,7 @@ const TodoContainer = () => {
 
 	const handleTextChange = (index, event) => {
 		const newValues = [...values];
-		newValues[index] = event.target.value;
+		newValues[index] = { ...newValues[index], text: event.target.value };
 		setValues(newValues);
 		handleSubmit(event);
 	};
@@ -97,7 +96,7 @@ const TodoContainer = () => {
 
 	const buttonIconSubmit = '✓';
 	const buttonIconPencil = '✏️';
-	console.log(isList);
+
 	return (
 		<ul className={styles['todo-list']}>
 			<Reorder.Group axis="y" onReorder={setValues} values={values}>
