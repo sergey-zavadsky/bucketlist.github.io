@@ -95,7 +95,6 @@ const TodoContainer = () => {
 	};
 
 	const buttonIconSubmit = '✓';
-	const buttonIconPencil = '✏️';
 
 	return (
 		<ul className={styles['todo-list']}>
@@ -129,7 +128,7 @@ const TodoContainer = () => {
 											? updateItemHandler(values[i].text, value._id, isDone[i])
 											: updateItemHandler(values[i].text, value._id, !isDone[i])
 									}
-									text={isDone[i] ? buttonIconPencil : buttonIconSubmit}
+									text={buttonIconSubmit}
 									minWidth={7}
 								/>
 								<Button
