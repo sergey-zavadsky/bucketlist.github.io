@@ -34,7 +34,6 @@ const TodoContainer = () => {
 	}, []);
 
 	useEffect(() => {
-		setIsFocusedButton(isList.map(() => false));
 		setValues(isList.map((item) => item));
 		setIsDone(isList.map((item) => item.isDone));
 	}, [isList]);
@@ -48,16 +47,21 @@ const TodoContainer = () => {
 
 	//*Fixed update for single item
 	const updateItemHandler = (inputedValue, id, isDone) => {
-		updateTodo(inputedValue, id, isDone);
-		setIsList((prevList) => {
-			return prevList.map((item) => {
-				if (item._id === id) {
-					return { ...item, text: inputedValue, isDone: isDone };
-				} else {
-					return item;
-				}
+		console.log(isFocusedButton[id]);
+		if (!isFocusedButton[id]) {
+			updateTodo(inputedValue, id, isDone);
+			setIsList((prevList) => {
+				return prevList.map((item) => {
+					if (item._id === id) {
+						return { ...item, text: inputedValue, isDone: isDone };
+					} else {
+						return item;
+					}
+				});
 			});
-		});
+		} else {
+			updateTodo(inputedValue, id, isDone);
+		}
 	};
 
 	const handleTextChange = (index, event) => {
@@ -69,17 +73,13 @@ const TodoContainer = () => {
 
 	const handleFocus = (id) => {
 		if (isFocusedButton) {
-			const newFocus = [...isFocusedButton];
-			newFocus[id] = true;
-			setIsFocusedButton((prevState) => ({ ...prevState, [id]: newFocus }));
+			setIsFocusedButton(() => ({ [id]: true }));
 		}
 	};
 
 	const handleBlur = (id) => {
 		if (isFocusedButton) {
-			const newFocus = [...isFocusedButton];
-			newFocus[id] = false;
-			setIsFocusedButton((prevState) => ({ ...prevState, [id]: newFocus }));
+			setIsFocusedButton(() => ({ [id]: false }));
 		}
 	};
 
@@ -90,7 +90,6 @@ const TodoContainer = () => {
 	const handleKeyPressAdd = (e) => {
 		if (e.key === 'Enter') {
 			e.currentTarget.blur();
-			return setIsFocusedButton(false);
 		}
 	};
 
@@ -124,9 +123,9 @@ const TodoContainer = () => {
 									borderRadius={0}
 									className={styles['todo-button']}
 									onClick={() =>
-										isDone && isFocusedButton[i]
-											? updateItemHandler(value.text, value._id, value.isDone)
-											: updateItemHandler(value.text, value._id, !value.isDone)
+										isDone && isFocusedButton !== value._id
+											? updateItemHandler(value.text, value._id, !value.isDone)
+											: updateItemHandler(value.text, value._id, value.isDone)
 									}
 									text={buttonIconSubmit}
 									minWidth={7.5}
