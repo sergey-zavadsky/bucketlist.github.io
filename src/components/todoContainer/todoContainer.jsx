@@ -67,19 +67,19 @@ const TodoContainer = () => {
 		handleSubmit(event);
 	};
 
-	const handleFocus = (index) => {
+	const handleFocus = (id) => {
 		if (isFocusedButton) {
 			const newFocus = [...isFocusedButton];
-			newFocus[index] = true;
-			setIsFocusedButton(newFocus);
+			newFocus[id] = true;
+			setIsFocusedButton((prevState) => ({ ...prevState, [id]: newFocus }));
 		}
 	};
 
-	const handleBlur = (index) => {
+	const handleBlur = (id) => {
 		if (isFocusedButton) {
 			const newFocus = [...isFocusedButton];
-			newFocus[index] = false;
-			setIsFocusedButton(newFocus);
+			newFocus[id] = false;
+			setIsFocusedButton((prevState) => ({ ...prevState, [id]: newFocus }));
 		}
 	};
 
@@ -114,9 +114,9 @@ const TodoContainer = () => {
 											: styles['todo-input']
 									}
 									onChange={(e) => handleTextChange(i, e)}
-									onFocus={() => handleFocus(i)}
+									onFocus={() => handleFocus(value._id)}
 									onBlur={() => {
-										handleBlur(i);
+										handleBlur(value._id);
 									}}
 									onKeyUp={(e) => handleKeyPressAdd(e)}
 								></Input>
@@ -124,9 +124,9 @@ const TodoContainer = () => {
 									borderRadius={0}
 									className={styles['todo-button']}
 									onClick={() =>
-										value.isDone && isFocusedButton[i]
-											? updateItemHandler(values[i].text, value._id, isDone[i])
-											: updateItemHandler(values[i].text, value._id, !isDone[i])
+										isDone && isFocusedButton[i]
+											? updateItemHandler(value.text, value._id, value.isDone)
+											: updateItemHandler(value.text, value._id, !value.isDone)
 									}
 									text={buttonIconSubmit}
 									minWidth={7.5}
