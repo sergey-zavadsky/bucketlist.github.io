@@ -124,18 +124,18 @@ const TodoContainer = () => {
 									borderRadius={0}
 									className={styles['todo-button']}
 									onClick={() =>
-										isDone[i] && isFocusedButton[i]
+										value.isDone && isFocusedButton[i]
 											? updateItemHandler(values[i].text, value._id, isDone[i])
 											: updateItemHandler(values[i].text, value._id, !isDone[i])
 									}
 									text={buttonIconSubmit}
-									minWidth={7}
+									minWidth={7.5}
 								/>
 								<Button
 									className={styles['todo-button']}
 									onClick={(e) => deleteHandler(e, value)}
 									text={intl(isLanguage).deleteItem}
-									minWidth={7}
+									minWidth={7.5}
 								/>
 							</form>
 						</Reorder.Item>
