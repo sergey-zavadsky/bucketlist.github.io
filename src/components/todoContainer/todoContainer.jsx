@@ -47,7 +47,6 @@ const TodoContainer = () => {
 
 	//*Fixed update for single item
 	const updateItemHandler = (inputedValue, id, isDone) => {
-		console.log(isFocusedButton[id]);
 		if (!isFocusedButton[id]) {
 			updateTodo(inputedValue, id, isDone);
 			setIsList((prevList) => {
@@ -60,7 +59,7 @@ const TodoContainer = () => {
 				});
 			});
 		} else {
-			updateTodo(inputedValue, id, isDone);
+			updateTodo(inputedValue, id, !isDone);
 		}
 	};
 
