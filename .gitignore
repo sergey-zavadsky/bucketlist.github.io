@@ -33,3 +33,5 @@
 
 # Backend testing
 /backend/coverage
+.vercel
+.env
