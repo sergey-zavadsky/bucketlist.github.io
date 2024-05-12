@@ -1,27 +1,16 @@
 {
 	"version": 2,
-	"name": "todo",
 	"builds": [
 		{
-			"src": "frontend/package.json",
-			"use": "@vercel/node",
-			"config": {
-				"includeFiles": "frontend/**"
-			}
-		},
-		{
-			"src": "backend/src/app.ts",
+			"src": "dist/app.js",
 			"use": "@vercel/node"
 		}
 	],
+
 	"routes": [
 		{
-			"src": "/api/(.*)",
-			"dest": "backend/src/app.ts"
-		},
-		{
 			"src": "/(.*)",
-			"dest": "frontend/$1"
+			"dest": "/"
 		}
 	]
 }

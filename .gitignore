@@ -35,3 +35,4 @@
 /backend/coverage
 .vercel
 .env
+/frontend/dist
