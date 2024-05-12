@@ -1,6 +1,6 @@
 export const Button = ({
-	text,
-	fontSize,
+	text = 'Click Me!',
+	fontSize = 15,
 	onClick,
 	className,
 	borderRadius,
@@ -26,9 +26,4 @@ export const Button = ({
 			{text}
 		</button>
 	);
-};
-
-Button.defaultProps = {
-	text: 'Click Me!',
-	fontSize: 15,
 };

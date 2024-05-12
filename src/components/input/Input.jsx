@@ -1,11 +1,11 @@
 export const Input = ({
 	onKeyUp,
 	value,
-	placeholder,
+	placeholder = '',
 	className,
 	onChange,
 	defaultValue,
-	type,
+	type = 'text',
 	onFocus,
 	onBlur,
 }) => (
@@ -21,8 +21,3 @@ export const Input = ({
 		onBlur={onBlur}
 	/>
 );
-
-Input.defaultProps = {
-	placeholder: '',
-	type: 'text',
-};

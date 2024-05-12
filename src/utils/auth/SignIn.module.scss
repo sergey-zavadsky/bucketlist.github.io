@@ -1,0 +1,49 @@
+.container {
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	border-radius: 10px;
+}
+
+.heading {
+	font-size: 1.875rem; /* 30px */
+	font-weight: 500;
+}
+
+.subContainer {
+	padding-top: 16px;
+}
+
+.subHeading {
+	padding-top: 16px;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.button {
+	color: white;
+	background-color: rgb(59, 59, 64);
+	padding: 16px;
+	width: 100%;
+	font-weight: 500;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.icon {
+	height: 1em;
+	width: 1em;
+}
+
+.google {
+	background-color: #4a5568;
+}
+
+.facebook {
+	background-color: #4a5568;
+}

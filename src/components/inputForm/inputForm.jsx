@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { addTodo } from '../../api/addTodo';
 import { useRecoilState } from 'recoil';
 import { isListState } from '../../app/stores';
@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 const InputForm = () => {
 	const [isList, setIsList] = useRecoilState(isListState);
 	const [inputedValue, setInputedValue] = useState('');
-	const plane = <FontAwesomeIcon icon={faArrowTurnRight} />;
+	const plane = <FontAwesomeIcon icon={faArrowRight} />;
 
 	const inputHandler = async () => {
 		if (!inputedValue) {

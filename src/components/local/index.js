@@ -7,6 +7,11 @@ const tr = (key) => {
 				emptyError: 'Заполните поле',
 				changeLanguage: 'Язык',
 				deleteItem: 'Удалить',
+				logout: 'Выйти',
+				noItems: 'Список пуст',
+				noItemsDescription: 'добавьте пару',
+				loading: 'Загрузка...',
+				loginGoogle: 'Войти через Google',
 			};
 		case 'BY':
 			return {
@@ -15,6 +20,11 @@ const tr = (key) => {
 				emptyError: 'Запоўніце поле',
 				changeLanguage: 'Мова',
 				deleteItem: 'Выдаліць',
+				logout: 'Выйсці',
+				noItems: 'Спіс пусты',
+				noItemsDescription: 'дадайце пару',
+				loading: 'Загрузка...',
+				loginGoogle: 'Увайсці праз Google',
 			};
 		default:
 			break;
