@@ -2,11 +2,8 @@
 	"name": "restapi",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/app.js",
 	"scripts": {
-		"test": "vitest",
-		"coverage": "vitest run --coverage",
-		"watch:build": "tsc --watch",
 		"start": "concurrently \"tsc --watch\" \"nodemon dist/app.js --trace-deprecation\""
 	},
 	"author": "",
