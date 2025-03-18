@@ -28,9 +28,15 @@ const TodoContainer = () => {
 	const fetchData = async () => {
 		try {
 			const res = await getTodos();
-			setIsList(res);
+			if (Array.isArray(res)) {
+				setIsList(res);
+			} else {
+				setIsList([]);
+				console.error('API response is not an array:', res);
+			}
 		} catch (error) {
 			console.log(error);
+			setIsList([]);
 		}
 	};
 
@@ -49,7 +55,6 @@ const TodoContainer = () => {
 		setIsLoading(true);
 		if (isUser) {
 			auth.currentUser.getIdToken(true).then(function (idToken) {
-				// Set the token in local storage
 				localStorage.setItem('token', idToken);
 				fetchData().then(() => {
 					setIsLoading(false);
@@ -59,18 +64,21 @@ const TodoContainer = () => {
 	}, [isUser]);
 
 	useEffect(() => {
-		setValues(isList.map((item) => item));
-		setIsDone(isList.map((item) => item.isDone));
+		if (Array.isArray(isList) && isList.length > 0) {
+			setValues(isList.map((item) => item));
+			setIsDone(isList.map((item) => item.isDone));
+		} else {
+			setValues([]);
+			setIsDone([]);
+		}
 	}, [isList]);
 
-	//* Fixed delete for single item
 	const deleteHandler = (e, param) => {
 		handleSubmit(e);
 		deleteTodo(param._id);
 		setIsList((prevList) => prevList.filter((ele) => ele._id !== param._id));
 	};
 
-	//*Fixed update for single item
 	const updateItemHandler = (inputedValue, id, isDone) => {
 		if (!isFocusedButton[id]) {
 			updateTodo(inputedValue, id, isDone);
@@ -124,20 +132,18 @@ const TodoContainer = () => {
 			<Reorder.Group
 				axis="y"
 				onReorder={(newOrder) => {
-					//* TODO: Save order of items
-					console.log(newOrder);
 					setValues(newOrder);
 				}}
 				values={values}
 			>
 				{isLoading ? (
 					<>{intl(isLanguage).loading}</>
-				) : isList.length === 0 && !isLoading ? (
+				) : Array.isArray(isList) && isList.length === 0 && !isLoading ? (
 					<>
 						<h2>{intl(isLanguage).noItems}</h2>
 						<p>{intl(isLanguage).noItemsDescription}</p>
 					</>
-				) : (
+				) : Array.isArray(values) && values.length > 0 ? (
 					values.map((value, i) => {
 						return (
 							<Reorder.Item value={value} key={value._id}>
@@ -185,6 +191,8 @@ const TodoContainer = () => {
 							</Reorder.Item>
 						);
 					})
+				) : (
+					<div>{intl(isLanguage).error || 'Error loading data'}</div>
 				)}
 			</Reorder.Group>
 		</ul>
