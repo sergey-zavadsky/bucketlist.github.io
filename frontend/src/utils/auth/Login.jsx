@@ -1,5 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth as auth_t } from '../auth/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,37 +13,42 @@ export default function Login() {
 		return state.switchLanguage.currentLanguage;
 	});
 	const navigate = useNavigate();
-	const [isAuht, setIsAuth] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			setLoading(false);
 			if (user) {
 				navigate('/');
-			} else {
-				navigate('/login');
 			}
 		});
-	}, [isAuht]);
+
+		return () => unsubscribe();
+	}, [navigate]);
 
 	const provider = new GoogleAuthProvider();
 	const GoogleLogin = async () => {
 		try {
-			await signInWithPopup(auth_t, provider).then(() => {
-				setIsAuth(true);
-			});
+			setLoading(true);
+			await signInWithPopup(auth_t, provider);
 		} catch (error) {
 			console.log(error);
+			setLoading(false);
 		}
 	};
 
+	if (loading) {
+		return <div className={styles.container}>Loading...</div>;
+	}
+
 	return (
 		<div className={styles.container}>
-			<h2 className={styles.heading}>Join today</h2>
 			<div className={styles.subContainer}>
 				<div className={styles.buttons}>
 					<button
 						onClick={GoogleLogin}
 						className={`${styles.button} ${styles.google}`}
+						disabled={loading}
 					>
 						<FcGoogle />
 						{intl(isLanguage).loginGoogle}
@@ -51,13 +56,5 @@ export default function Login() {
 				</div>
 			</div>
 		</div>
-		// <div>
-		// 	<div>
-		// 		<button onClick={GoogleLogin}>
-		// 			<FcGoogle />
-		// 			{intl(isLanguage).loginGoogle}
-		// 		</button>
-		// 	</div>
-		// </div>
 	);
 }
