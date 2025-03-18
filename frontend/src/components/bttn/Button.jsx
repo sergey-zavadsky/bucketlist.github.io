@@ -7,6 +7,7 @@ export const Button = ({
 	onSubmit,
 	minWidth,
 	padding,
+	icon,
 }) => {
 	const buttonStyle = {
 		fontSize: fontSize + 'px',
@@ -15,7 +16,19 @@ export const Button = ({
 		padding: `${padding}px`,
 	};
 
-	return (
+	return icon ? (
+		<button
+			style={buttonStyle}
+			className={className}
+			onClick={onClick}
+			onSubmit={(e) => onSubmit}
+			type="submit"
+		>
+			<img src={icon} alt={text + ' icon'} />
+
+			{text}
+		</button>
+	) : (
 		<button
 			style={buttonStyle}
 			className={className}

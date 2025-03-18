@@ -19,6 +19,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 	res.status(400).json({ message: err.message });
 });
 
-app.listen(3000, () => {
-	console.log('Server is running at http://localhost:3000');
-});
+if (process.env.NODE_ENV !== 'production') {
+	app.listen(3000, () => {
+		console.log('Server is running at http://localhost:3000');
+	});
+}
+
+export default app;

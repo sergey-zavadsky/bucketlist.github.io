@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "dist/app.js",
 	"scripts": {
-		"start": "concurrently \"tsc --watch\" \"nodemon dist/app.js --trace-deprecation\""
+		"start": "concurrently \"tsc --watch\" \"nodemon dist/app.js --trace-deprecation\"",
+		"build": "tsc"
 	},
 	"author": "",
 	"license": "ISC",

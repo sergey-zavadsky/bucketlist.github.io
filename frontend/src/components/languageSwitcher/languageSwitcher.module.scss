@@ -5,3 +5,26 @@
 	justify-content: center;
 	flex-direction: column;
 }
+
+.todo-button {
+	min-height: 5vh;
+	width: 20%;
+	transition: 0.2s ease-in-out;
+	color: v.$text;
+	cursor: pointer;
+	background-color: v.$bg-clickable-items;
+	border-style: none;
+	// min-width: 110px;
+	border-radius: 0px 5px 5px 0px;
+	&:hover {
+		outline: none;
+		background-color: v.$bg-button;
+	}
+	&:active {
+		outline: none;
+		background-color: v.$bg-active;
+	}
+	img {
+		filter: invert(1);
+	}
+}

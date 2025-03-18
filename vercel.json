@@ -1,0 +1,5 @@
+{
+	"rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
+	"buildCommand": "npm run build",
+	"outputDirectory": "frontend/dist"
+}

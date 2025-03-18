@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"install": "npm --prefix ./frontend install && npm --prefix ./backend install",
-		"start": "npm --prefix ./frontend start & npm --prefix ./backend start"
+		"start": "npm --prefix ./frontend start & npm --prefix ./backend start",
+		"build": "npm --prefix ./backend run build && npm --prefix ./frontend run build"
 	}
 }
