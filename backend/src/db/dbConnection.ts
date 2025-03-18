@@ -1,7 +1,7 @@
 import { MongoClient, Db } from 'mongodb';
 import '../loadEnvironment';
 
-const connectionString = process.env.ATLAS_URI;
+const connectionString = process.env.MONGODB_URI;
 const dbCollection = process.env.DB_COLLECTION || '';
 const dbName = process.env.DB_NAME || '';
 const client = new MongoClient(connectionString || '');
