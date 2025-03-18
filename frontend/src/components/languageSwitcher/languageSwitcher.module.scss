@@ -7,15 +7,14 @@
 }
 
 .todo-button {
-	min-height: 5vh;
-	width: 20%;
 	transition: 0.2s ease-in-out;
 	color: v.$text;
 	cursor: pointer;
 	background-color: v.$bg-clickable-items;
 	border-style: none;
-	// min-width: 110px;
-	border-radius: 0px 5px 5px 0px;
+	padding: 0 15px;
+	margin: 0 0 0 5px;
+	border-radius: 5px 0px 0px 5px;
 	&:hover {
 		outline: none;
 		background-color: v.$bg-button;

@@ -4,14 +4,80 @@
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+	-webkit-text-size-adjust: 100%;
 }
 
 html,
 body,
 #root {
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 	background-color: v.$bg;
 	color: v.$text;
+	overflow-x: hidden;
 	overflow-y: auto;
+	position: relative;
+}
+
+@viewport {
+	width: device-width;
+	zoom: 1;
+}
+
+@media (max-width: 768px) {
+	html {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 480px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+button,
+input,
+select,
+a {
+	min-height: 44px;
+	min-width: 44px;
+}
+
+input,
+textarea,
+select {
+	font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+@supports (padding: max(0px)) {
+	body {
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	hyphens: auto;
 }

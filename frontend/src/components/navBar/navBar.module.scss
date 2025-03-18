@@ -4,37 +4,92 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 70%;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px 20px;
+	box-sizing: border-box;
 
 	h1 {
-		float: left;
 		color: v.$text;
-		text-align: center;
-		padding: 14px 16px;
 		text-decoration: none;
 		font-size: 35px;
+		margin: 0;
+		padding: 0;
 	}
 }
 
+.navbar-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.navbar-left {
+	display: flex;
+	align-items: center;
+}
+
+.navbar-right {
+	display: flex;
+	align-items: center;
+}
+
 .todo-button {
-	min-height: 5vh;
-	width: 20%;
+	height: 40px;
 	transition: 0.2s ease-in-out;
+	padding: 0 15px;
+	border-radius: 0px 5px 5px 0;
+
 	color: v.$text;
 	cursor: pointer;
 	background-color: v.$bg-clickable-items;
 	border-style: none;
-	// min-width: 110px;
-	border-radius: 0px 5px 5px 0px;
+
 	&:hover {
 		outline: none;
 		background-color: v.$bg-button;
 	}
+
 	&:active {
 		outline: none;
 		background-color: v.$bg-active;
 	}
+
 	img {
 		filter: invert(1);
+	}
+}
+
+@media (max-width: 768px) {
+	.nav {
+		padding: 10px;
+	}
+
+	.navbar-content {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.nav {
+		padding: 10px 5px;
+	}
+
+	.navbar-content {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.navbar-right {
+		margin-top: 10px;
+		width: 100%;
+		justify-content: center;
+	}
+
+	h1 {
+		font-size: 28px !important;
 	}
 }

@@ -2,16 +2,22 @@
 
 .todo-list {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 5px 0 5px 0;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin: 5px 0;
 	height: 70vh;
-	overflow: scroll;
+	overflow-y: auto;
+	width: 100%;
+	padding: 0 10px;
+}
+
+ul {
+	list-style: none;
 }
 
 .absolute-bottom {
 	display: flex;
-	border-radius: 5px 0 0 5px;
+	width: 80%;
 }
 
 .todo-input {
@@ -19,14 +25,13 @@
 	background-color: rgb(59, 59, 64);
 	border-style: none;
 	padding-left: 2vh;
-	//* pointer color
 	color: v.$text;
 	font-size: large;
 	z-index: 2;
-	width: 60vh;
-	min-height: 5vh;
+	flex: 1;
 	margin-left: 10px;
 	outline: none;
+
 	&:focus-within {
 		background-color: v.$bg-active;
 	}
@@ -36,12 +41,13 @@
 		text-decoration: line-through;
 	}
 }
+
 .todo-input-form {
 	display: flex;
 	color: v.$text;
 	padding: 5px;
-	min-height: 55px;
-	min-width: 600px;
+
+	width: 100%;
 	align-items: center;
 }
 
@@ -52,22 +58,53 @@
 }
 
 .todo-button {
-	min-height: 5vh;
-	width: 20%;
+	width: auto;
+	padding: 0 15px;
 	transition: 0.2s ease-in-out;
 	color: v.$text;
 	cursor: pointer;
 	background-color: v.$bg-clickable-items;
 	border-style: none;
-	// min-width: 110px;
 	border-radius: 0px 5px 5px 0px;
+
 	&:hover {
 		outline: none;
 		background-color: v.$bg-button;
 	}
+
 	&:active {
 		outline: none;
 		background-color: v.$bg-active;
+	}
+}
+
+@media (max-width: 768px) {
+	.todo-input-form {
+		min-height: 50px;
+	}
+
+	.todo-button {
+		padding: 0 10px;
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 480px) {
+	.todo-list {
+		height: 80vh;
+	}
+
+	.todo-input-form {
+		align-items: stretch;
+		gap: 5px;
+	}
+
+	.todo-input {
+		min-width: 65%;
+		margin-left: 0;
+	}
+	ul {
+		list-style: none;
 	}
 }
 
@@ -82,7 +119,7 @@
 	--highlight-color: #f5f5f5;
 	--animation-duration: 1.5s;
 	--animation-direction: normal;
-	--pseudo-element-display: block; /* Enable animation */
+	--pseudo-element-display: block;
 
 	background-color: var(--base-color);
 
@@ -122,6 +159,6 @@
 
 @media (prefers-reduced-motion) {
 	.react-loading-skeleton {
-		--pseudo-element-display: none; /* Disable animation */
+		--pseudo-element-display: none;
 	}
 }

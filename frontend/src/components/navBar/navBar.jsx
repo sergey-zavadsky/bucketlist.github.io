@@ -9,18 +9,22 @@ const NavBar = () => {
 	const isLanguage = useSelector((state) => {
 		return state.switchLanguage.currentLanguage;
 	});
+
 	return (
 		<nav className={styles.nav}>
-			<h1>{intl(isLanguage).bucketList}</h1>
+			<div className={styles['navbar-content']}>
+				<div className={styles['navbar-left']}>
+					<h1>{intl(isLanguage).bucketList}</h1>
+				</div>
 
-			<div className={styles['']}>
-				<LanguageSwitcher />
-				<Button
-					borderRadius={0}
-					className={styles['todo-button']}
-					text={intl(isLanguage).logout}
-					onClick={logout}
-				/>
+				<div className={styles['navbar-right']}>
+					<LanguageSwitcher />
+					<Button
+						className={styles['todo-button']}
+						text={intl(isLanguage).logout}
+						onClick={logout}
+					/>
+				</div>
 			</div>
 		</nav>
 	);
