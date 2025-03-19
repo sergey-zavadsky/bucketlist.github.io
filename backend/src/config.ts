@@ -13,15 +13,25 @@ export const swaggerUiConfig = {
 			contact: {
 				name: 'TODO',
 				url: 'https://sergey-zavadsky.github.io/bucketlist.github.io/',
-				email: 'siarhei.zavadski@email.com',
+				email: 'siarhei.zavadski@gmail.com',
 			},
 		},
 		servers: [
 			{
-				url: 'http://localhost:3000/api/v1/',
+				url:
+					process.env.NODE_ENV === 'production'
+						? '/api/v1/'
+						: 'http://localhost:3000/api/v1/',
+				description:
+					process.env.NODE_ENV === 'production'
+						? 'Production server'
+						: 'Local development server',
+			},
+			{
+				url: '/api/v1/',
+				description: 'Production server',
 			},
 		],
 	},
-
 	apis: ['docs/*.yaml'],
 };
