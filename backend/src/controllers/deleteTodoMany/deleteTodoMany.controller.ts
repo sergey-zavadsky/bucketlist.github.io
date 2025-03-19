@@ -1,6 +1,11 @@
 import { RequestHandler } from 'express';
-import { db, dbCollection } from '../../db/dbConnection';
+import { connectToDatabase, dbCollection } from '../../db/dbConnection';
 import { ObjectId } from 'mongodb';
+import { RequestWithDatabase } from '../../middleware/database';
+
+interface RequestWithUserAndDatabase extends RequestWithDatabase {
+	userId?: string;
+}
 
 interface TodoParams {
 	ids: string;
@@ -14,16 +19,23 @@ const validateParams = (params: TodoParams) => {
 
 export const deleteTodoMany: RequestHandler = async (req, res, next) => {
 	try {
+		const { db } = await connectToDatabase();
+		const typedReq = req as RequestWithUserAndDatabase;
+
 		const { ids } = req.params as unknown as TodoParams;
 		validateParams({ ids });
 
 		const objectIds = ids.split(',').map((id) => new ObjectId(id));
-		const query = { _id: { $in: objectIds }, userId: req.userId };
+		const query = { _id: { $in: objectIds }, userId: typedReq.userId };
 
 		await db.collection(dbCollection).deleteMany(query);
 
-		return res.status(200).json({ message: 'Todos has been deleted', ids });
+		return res.status(200).json({ message: 'Todos have been deleted', ids });
 	} catch (error) {
-		return res.status(400).json({ message: error });
+		console.error('Error in deleteTodoMany controller:', error);
+		if (error instanceof Error) {
+			return res.status(400).json({ message: error.message });
+		}
+		return res.status(500).json({ message: 'Internal server error' });
 	}
 };

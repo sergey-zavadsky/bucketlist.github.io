@@ -6,13 +6,15 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerUiConfig } from './config';
 import { authenticate } from './middleware/authenticate';
+import { ensureDatabaseConnection } from './middleware/database';
 
 const app = express();
 const swaggerSpec = swaggerJsDoc(swaggerUiConfig);
 
 app.use(cors());
 app.use(json());
-app.use('/api/v1/todos', authenticate, todosRoutes);
+
+app.use('/api/v1/todos', authenticate, ensureDatabaseConnection, todosRoutes);
 app.use('/api/v1/', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

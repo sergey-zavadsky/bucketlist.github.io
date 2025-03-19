@@ -1,7 +1,12 @@
 import { RequestHandler } from 'express';
-import { db, dbCollection } from '../../db/dbConnection';
+import { connectToDatabase, dbCollection } from '../../db/dbConnection';
 import { ObjectId } from 'mongodb';
 import { TodoParams } from '../interfaces/todo.requestParams.interface';
+import { RequestWithDatabase } from '../../middleware/database';
+
+interface RequestWithUserAndDatabase extends RequestWithDatabase {
+	userId?: string;
+}
 
 const validateParams = (params: TodoParams) => {
 	if (!params.id) {
@@ -11,11 +16,14 @@ const validateParams = (params: TodoParams) => {
 
 export const deleteTodo: RequestHandler = async (req, res, next) => {
 	try {
+		const { db } = await connectToDatabase();
+		const typedReq = req as RequestWithUserAndDatabase;
+
 		const { id } = req.params as unknown as TodoParams;
 		validateParams({ id });
 
 		const objectId = new ObjectId(id);
-		const query = { _id: objectId, userId: req.userId };
+		const query = { _id: objectId, userId: typedReq.userId };
 		const item = db.collection(dbCollection);
 		const findItem = await item?.findOne(query);
 
@@ -27,6 +35,10 @@ export const deleteTodo: RequestHandler = async (req, res, next) => {
 
 		return res.status(200).json({ id: id, text: findItem.text });
 	} catch (error) {
-		return res.status(400).json({ message: (error as Error).message });
+		console.error('Error in deleteTodo controller:', error);
+		if (error instanceof Error) {
+			return res.status(400).json({ message: error.message });
+		}
+		return res.status(500).json({ message: 'Internal server error' });
 	}
 };

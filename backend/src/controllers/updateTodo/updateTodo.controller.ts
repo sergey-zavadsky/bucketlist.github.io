@@ -1,12 +1,20 @@
 import { RequestHandler } from 'express';
-import { db, dbCollection } from '../../db/dbConnection';
+import { connectToDatabase, dbCollection } from '../../db/dbConnection';
 import { ObjectId } from 'mongodb';
 import { validateText, validateIsDone } from '../validations';
 import { TodoRequestBody } from '../interfaces/todo.requestBody.interface';
+import { RequestWithDatabase } from '../../middleware/database';
+
+interface RequestWithUserAndDatabase extends RequestWithDatabase {
+	userId?: string;
+}
 
 export const updateTodo: RequestHandler = async (req, res, next) => {
 	try {
+		const { db } = await connectToDatabase();
+
 		const { text, isDone } = req.body as TodoRequestBody;
+		const typedReq = req as RequestWithUserAndDatabase;
 
 		try {
 			validateText(text);
@@ -15,16 +23,14 @@ export const updateTodo: RequestHandler = async (req, res, next) => {
 			}
 		} catch (error) {
 			const message = (error as Error).message;
-
 			return res.status(400).json({ message: message });
 		}
 
 		const updatedAt = new Date().toISOString();
 		const id = new ObjectId(req.params.id as unknown as string);
-		const query = { _id: id, userId: req.userId };
+		const query = { _id: id, userId: typedReq.userId };
 
 		const item = db.collection(dbCollection);
-
 		const findItem = await item?.findOne(query);
 
 		if (!findItem) {
@@ -46,6 +52,7 @@ export const updateTodo: RequestHandler = async (req, res, next) => {
 			isDone: findItem?.isDone,
 		});
 	} catch (error) {
+		console.error('Error in updateTodo controller:', error);
 		return res.status(400).json({ message: (error as Error).message });
 	}
 };
